@@ -41,7 +41,7 @@ namespace 鏡面反射光除去処理
                 int height = 入力画像[0].Height;
                 出力画像 = Cv.CreateImage(new CvSize(width, height), BitDepth.U8, 1);//メディアンのみ
                 manualCV mCV = new manualCV();//メディアンフィルタかけるためのクラス
-                mCV.Median(入力画像, ref 出力画像);
+                mCV.鏡面反射光除去(入力画像, ref 出力画像);
                 if(!(gaussian==0))Cv.Smooth(出力画像, 出力画像, SmoothType.Gaussian, gaussian);//ガウシアンフィルタ
                 mCV.brightness(ref 出力画像, bright);
             }

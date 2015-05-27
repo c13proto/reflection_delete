@@ -8,6 +8,29 @@ namespace 鏡面反射光除去処理
 {
     class manualCV
     {
+        public void 鏡面反射光除去(IplImage[] images, ref IplImage DST)
+        {
+            int width = images[0].Width;
+            int height = images[0].Height;
+
+            for (int x = 0; x < width; x++)
+                for (int y = 0; y < height; y++)
+                {//medianX,Y SG完成
+                    double[] vals = { 0, 0, 0, 0 };
+
+                    for (int num = 0; num < 4; num++) vals[num] = Cv.Get2D(images[num], y, x).Val0;
+                    Array.Sort(vals);//並び替えを行う．min=vals[0]
+
+                    CvScalar cs = Cv.Get2D(DST, y, x);
+                    double ave = ( vals[1] + vals[2] ) / 2;
+                    cs.Val0 = ave;
+                    //if (Math.Abs(ave - vals[3]) <= 30) cs.Val0 = vals[3];//どれも同じくらいだったら一番明るいのをとる
+
+                    Cv.Set2D(DST, y, x, cs);
+                }
+            //for (int num = 0; num < 4; num++)images[num].Dispose();元のものに影響するっぽい
+
+        }
 
         public void Median(IplImage[] images,ref IplImage DST)
         {
@@ -23,7 +46,7 @@ namespace 鏡面反射光除去処理
                     Array.Sort(vals);//並び替えを行う．min=vals[0]
 
                     CvScalar cs=Cv.Get2D(DST,y,x);
-                    cs.Val0 = (vals[0] + vals[1] + vals[2]) / 3;
+                    cs.Val0 = ( vals[1] + vals[2]) / 2;
                     Cv.Set2D(DST, y, x, cs);
                 }
             //for (int num = 0; num < 4; num++)images[num].Dispose();元のものに影響するっぽい
