@@ -22,16 +22,29 @@ namespace 鏡面反射光除去処理
                     Array.Sort(vals);//並び替えを行う．min=vals[0]
 
                     CvScalar cs = Cv.Get2D(DST, y, x);
-                    double ave = ( vals[1] + vals[2] ) / 2;
+                    double ave = (vals[0]+vals[1] + vals[2]) / 3.0;
                     cs.Val0 = ave;
-                    //if (Math.Abs(ave - vals[3]) <= 30) cs.Val0 = vals[3];//どれも同じくらいだったら一番明るいのをとる
-
+                    //if (Math.Abs(ave - vals[3]) <= 35) cs.Val0 = vals[3];//どれも同じくらいだったら一番明るいのをとる
                     Cv.Set2D(DST, y, x, cs);
                 }
             //for (int num = 0; num < 4; num++)images[num].Dispose();元のものに影響するっぽい
 
         }
+        public void コントラスト調整(ref IplImage src,double 倍率)
+        {
+            int width = src.Width;
+            int height = src.Height;
 
+            for (int x = 0; x < width; x++)
+                for (int y = 0; y < height; y++)
+                {
+                    CvScalar cs = Cv.Get2D(src, y, x);
+                    cs.Val0 *= 倍率;
+                    Cv.Set2D(src, y, x, cs);
+                }
+            //for (int num = 0; num < 4; num++)images[num].Dispose();元のものに影響するっぽい
+
+        }
         public void Median(IplImage[] images,ref IplImage DST)
         {
             int width = images[0].Width;
@@ -57,16 +70,16 @@ namespace 鏡面反射光除去処理
 
             int width = img.Width;
             int height = img.Height;
-            int center_x = width / 2;
-            int center_y = height / 2;
+            int center_x = width /5;
+            int center_y = height /5;
 
             double[] vals= new double[9];
             double average=0;
             double diff = 0;
 
-            vals[0] = Cv.Get2D(img, center_y - 10, 310); vals[3] = Cv.Get2D(img, center_y - 10, center_x); vals[6] = Cv.Get2D(img, center_y-10, 330);
-            vals[1] = Cv.Get2D(img, center_y, 310);      vals[4] = Cv.Get2D(img, center_y, center_x);      vals[7] = Cv.Get2D(img, center_y, 330);
-            vals[2] = Cv.Get2D(img, center_y + 10, 310); vals[5] = Cv.Get2D(img, center_y + 10, center_x); vals[8] = Cv.Get2D(img, center_y+10, 330);
+            vals[0] = Cv.Get2D(img, center_y - 10, center_x - 10); vals[3] = Cv.Get2D(img, center_y - 10, center_x); vals[6] = Cv.Get2D(img, center_y - 10, center_x+10);
+            vals[1] = Cv.Get2D(img, center_y, center_x - 10); vals[4] = Cv.Get2D(img, center_y, center_x); vals[7] = Cv.Get2D(img, center_y, center_x+10);
+            vals[2] = Cv.Get2D(img, center_y + 10, center_x - 10); vals[5] = Cv.Get2D(img, center_y + 10, center_x); vals[8] = Cv.Get2D(img, center_y + 10, center_x+10);
 
             for (int num = 0; num < 9; num++) average += vals[num];
             average = average / 9.0;

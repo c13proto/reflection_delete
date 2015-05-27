@@ -46,15 +46,19 @@
             this.textBox_Bright = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.trackBar_cont = new System.Windows.Forms.TrackBar();
+            this.textBox_cont = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIpl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_選択)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_cont)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBoxIpl1
             // 
-            this.pictureBoxIpl1.Location = new System.Drawing.Point(98, 12);
+            this.pictureBoxIpl1.Location = new System.Drawing.Point(95, 1);
             this.pictureBoxIpl1.Name = "pictureBoxIpl1";
-            this.pictureBoxIpl1.Size = new System.Drawing.Size(338, 292);
+            this.pictureBoxIpl1.Size = new System.Drawing.Size(361, 323);
             this.pictureBoxIpl1.TabIndex = 0;
             this.pictureBoxIpl1.TabStop = false;
             this.pictureBoxIpl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OnClick_pictureBoxIpl1);
@@ -62,7 +66,7 @@
             // 
             // button_開く
             // 
-            this.button_開く.Location = new System.Drawing.Point(12, 12);
+            this.button_開く.Location = new System.Drawing.Point(3, 1);
             this.button_開く.Name = "button_開く";
             this.button_開く.Size = new System.Drawing.Size(81, 23);
             this.button_開く.TabIndex = 1;
@@ -72,7 +76,7 @@
             // 
             // textBox_x
             // 
-            this.textBox_x.Location = new System.Drawing.Point(12, 42);
+            this.textBox_x.Location = new System.Drawing.Point(3, 30);
             this.textBox_x.Name = "textBox_x";
             this.textBox_x.Size = new System.Drawing.Size(30, 19);
             this.textBox_x.TabIndex = 2;
@@ -81,7 +85,7 @@
             // 
             // textBox_y
             // 
-            this.textBox_y.Location = new System.Drawing.Point(48, 42);
+            this.textBox_y.Location = new System.Drawing.Point(39, 30);
             this.textBox_y.Name = "textBox_y";
             this.textBox_y.Size = new System.Drawing.Size(30, 19);
             this.textBox_y.TabIndex = 3;
@@ -91,7 +95,7 @@
             // label_color
             // 
             this.label_color.AutoSize = true;
-            this.label_color.Location = new System.Drawing.Point(15, 64);
+            this.label_color.Location = new System.Drawing.Point(4, 52);
             this.label_color.Name = "label_color";
             this.label_color.Size = new System.Drawing.Size(10, 12);
             this.label_color.TabIndex = 4;
@@ -100,7 +104,7 @@
             // label_座標
             // 
             this.label_座標.AutoSize = true;
-            this.label_座標.Location = new System.Drawing.Point(15, 85);
+            this.label_座標.Location = new System.Drawing.Point(1, 64);
             this.label_座標.Name = "label_座標";
             this.label_座標.Size = new System.Drawing.Size(27, 12);
             this.label_座標.TabIndex = 5;
@@ -108,16 +112,17 @@
             // 
             // trackBar_選択
             // 
-            this.trackBar_選択.Location = new System.Drawing.Point(12, 100);
+            this.trackBar_選択.AutoSize = false;
+            this.trackBar_選択.Location = new System.Drawing.Point(-3, 79);
             this.trackBar_選択.Maximum = 4;
             this.trackBar_選択.Name = "trackBar_選択";
-            this.trackBar_選択.Size = new System.Drawing.Size(81, 45);
+            this.trackBar_選択.Size = new System.Drawing.Size(81, 23);
             this.trackBar_選択.TabIndex = 6;
             this.trackBar_選択.Scroll += new System.EventHandler(this.OnScroll_trackBar_選択);
             // 
             // button_実行
             // 
-            this.button_実行.Location = new System.Drawing.Point(12, 173);
+            this.button_実行.Location = new System.Drawing.Point(3, 152);
             this.button_実行.Name = "button_実行";
             this.button_実行.Size = new System.Drawing.Size(66, 23);
             this.button_実行.TabIndex = 7;
@@ -128,7 +133,7 @@
             // checkBox_Gx
             // 
             this.checkBox_Gx.AutoSize = true;
-            this.checkBox_Gx.Location = new System.Drawing.Point(12, 129);
+            this.checkBox_Gx.Location = new System.Drawing.Point(3, 108);
             this.checkBox_Gx.Name = "checkBox_Gx";
             this.checkBox_Gx.Size = new System.Drawing.Size(38, 16);
             this.checkBox_Gx.TabIndex = 8;
@@ -138,7 +143,7 @@
             // checkBox_Gy
             // 
             this.checkBox_Gy.AutoSize = true;
-            this.checkBox_Gy.Location = new System.Drawing.Point(55, 129);
+            this.checkBox_Gy.Location = new System.Drawing.Point(46, 108);
             this.checkBox_Gy.Name = "checkBox_Gy";
             this.checkBox_Gy.Size = new System.Drawing.Size(38, 16);
             this.checkBox_Gy.TabIndex = 9;
@@ -148,7 +153,7 @@
             // checkBox_SG
             // 
             this.checkBox_SG.AutoSize = true;
-            this.checkBox_SG.Location = new System.Drawing.Point(12, 151);
+            this.checkBox_SG.Location = new System.Drawing.Point(3, 130);
             this.checkBox_SG.Name = "checkBox_SG";
             this.checkBox_SG.Size = new System.Drawing.Size(39, 16);
             this.checkBox_SG.TabIndex = 10;
@@ -158,7 +163,7 @@
             // checkBox_G2
             // 
             this.checkBox_G2.AutoSize = true;
-            this.checkBox_G2.Location = new System.Drawing.Point(54, 151);
+            this.checkBox_G2.Location = new System.Drawing.Point(45, 130);
             this.checkBox_G2.Name = "checkBox_G2";
             this.checkBox_G2.Size = new System.Drawing.Size(38, 16);
             this.checkBox_G2.TabIndex = 11;
@@ -167,7 +172,7 @@
             // 
             // button_自作
             // 
-            this.button_自作.Location = new System.Drawing.Point(12, 202);
+            this.button_自作.Location = new System.Drawing.Point(3, 181);
             this.button_自作.Name = "button_自作";
             this.button_自作.Size = new System.Drawing.Size(66, 23);
             this.button_自作.TabIndex = 12;
@@ -177,7 +182,7 @@
             // 
             // button_保存
             // 
-            this.button_保存.Location = new System.Drawing.Point(12, 281);
+            this.button_保存.Location = new System.Drawing.Point(6, 299);
             this.button_保存.Name = "button_保存";
             this.button_保存.Size = new System.Drawing.Size(66, 23);
             this.button_保存.TabIndex = 13;
@@ -187,7 +192,7 @@
             // 
             // textBox_Gaus
             // 
-            this.textBox_Gaus.Location = new System.Drawing.Point(17, 231);
+            this.textBox_Gaus.Location = new System.Drawing.Point(3, 210);
             this.textBox_Gaus.Name = "textBox_Gaus";
             this.textBox_Gaus.Size = new System.Drawing.Size(30, 19);
             this.textBox_Gaus.TabIndex = 14;
@@ -196,17 +201,17 @@
             // 
             // textBox_Bright
             // 
-            this.textBox_Bright.Location = new System.Drawing.Point(17, 256);
+            this.textBox_Bright.Location = new System.Drawing.Point(3, 235);
             this.textBox_Bright.Name = "textBox_Bright";
             this.textBox_Bright.Size = new System.Drawing.Size(30, 19);
             this.textBox_Bright.TabIndex = 15;
-            this.textBox_Bright.Text = "80";
+            this.textBox_Bright.Text = "100";
             this.textBox_Bright.TextChanged += new System.EventHandler(this.TextChanged_Bright);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(53, 238);
+            this.label1.Location = new System.Drawing.Point(52, 213);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(31, 12);
             this.label1.TabIndex = 16;
@@ -215,18 +220,51 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(53, 263);
+            this.label2.Location = new System.Drawing.Point(52, 238);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(36, 12);
             this.label2.TabIndex = 17;
             this.label2.Text = "Bright";
+            // 
+            // trackBar_cont
+            // 
+            this.trackBar_cont.AutoSize = false;
+            this.trackBar_cont.Location = new System.Drawing.Point(-3, 274);
+            this.trackBar_cont.Maximum = 80;
+            this.trackBar_cont.Minimum = 10;
+            this.trackBar_cont.Name = "trackBar_cont";
+            this.trackBar_cont.Size = new System.Drawing.Size(53, 16);
+            this.trackBar_cont.TabIndex = 18;
+            this.trackBar_cont.Value = 40;
+            this.trackBar_cont.ValueChanged += new System.EventHandler(this.ValueChanged_cont);
+            // 
+            // textBox_cont
+            // 
+            this.textBox_cont.Location = new System.Drawing.Point(56, 274);
+            this.textBox_cont.Name = "textBox_cont";
+            this.textBox_cont.Size = new System.Drawing.Size(28, 19);
+            this.textBox_cont.TabIndex = 19;
+            this.textBox_cont.Text = "4.0";
+            this.textBox_cont.TextChanged += new System.EventHandler(this.TectChanged_cont);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(1, 257);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(55, 12);
+            this.label3.TabIndex = 20;
+            this.label3.Text = "コントラスト";
             // 
             // メイン画面
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(446, 313);
+            this.ClientSize = new System.Drawing.Size(471, 333);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.textBox_cont);
+            this.Controls.Add(this.trackBar_cont);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox_Bright);
@@ -249,6 +287,7 @@
             this.Text = "メイン画面";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIpl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_選択)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_cont)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -274,6 +313,9 @@
         private System.Windows.Forms.TextBox textBox_Bright;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TrackBar trackBar_cont;
+        private System.Windows.Forms.TextBox textBox_cont;
+        private System.Windows.Forms.Label label3;
     }
 }
 

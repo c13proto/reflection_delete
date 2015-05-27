@@ -32,6 +32,25 @@ namespace 鏡面反射光除去処理
             gaussian = int.Parse(textBox_Gaus.Text);
             bright = int.Parse(textBox_Bright.Text);
         }
+        private void 自作プロセス実行()
+        {
+            Console.WriteLine("自作プロセス開始");
+            if (is4Image)
+            {
+                int width = 入力画像[0].Width;
+                int height = 入力画像[0].Height;
+                出力画像 = Cv.CreateImage(new CvSize(width, height), BitDepth.U8, 1);//メディアンのみ
+                manualCV mCV = new manualCV();//メディアンフィルタかけるためのクラス
+                mCV.鏡面反射光除去(入力画像, ref 出力画像);
+                if (!(gaussian == 0)) Cv.Smooth(出力画像, 出力画像, SmoothType.Gaussian, gaussian);//ガウシアンフィルタ
+                mCV.コントラスト調整(ref 出力画像, (double)trackBar_cont.Value / 10.0);
+                mCV.brightness(ref 出力画像, bright);
+                pictureBoxIpl1.ImageIpl = 出力画像;
+            }
+            else Console.WriteLine("no 4 images");
+            Console.WriteLine("自作プロセス終了");
+ 
+        }
         private void OnClick自作(object sender, EventArgs e)
         {
             Console.WriteLine("OnClick自作　開始");
@@ -43,6 +62,7 @@ namespace 鏡面反射光除去処理
                 manualCV mCV = new manualCV();//メディアンフィルタかけるためのクラス
                 mCV.鏡面反射光除去(入力画像, ref 出力画像);
                 if(!(gaussian==0))Cv.Smooth(出力画像, 出力画像, SmoothType.Gaussian, gaussian);//ガウシアンフィルタ
+                mCV.コントラスト調整(ref 出力画像,(double)trackBar_cont.Value/10.0);
                 mCV.brightness(ref 出力画像, bright);
             }
             else Console.WriteLine("no 4 images");
@@ -253,6 +273,20 @@ namespace 鏡面反射光除去処理
         private void TextChanged_Bright(object sender, EventArgs e)
         {
             bright = int.Parse(textBox_Bright.Text);
+        }
+
+        private void ValueChanged_cont(object sender, EventArgs e)
+        {
+            textBox_cont.Text = (trackBar_cont.Value / 10.0).ToString();
+            自作プロセス実行();
+        }
+
+        private void TectChanged_cont(object sender, EventArgs e)
+        {
+            double isnumber;
+            if (double.TryParse(textBox_cont.Text, out isnumber))
+                if (isnumber >= trackBar_cont.Minimum*10 && isnumber <= trackBar_cont.Maximum*10)
+                    trackBar_cont.Value = (int)isnumber*10;
         }
 
 
