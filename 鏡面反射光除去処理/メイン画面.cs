@@ -53,20 +53,7 @@ namespace 鏡面反射光除去処理
         }
         private void OnClick自作(object sender, EventArgs e)
         {
-            Console.WriteLine("OnClick自作　開始");
-            if (is4Image)
-            {
-                int width = 入力画像[0].Width;
-                int height = 入力画像[0].Height;
-                出力画像 = Cv.CreateImage(new CvSize(width, height), BitDepth.U8, 1);//メディアンのみ
-                manualCV mCV = new manualCV();//メディアンフィルタかけるためのクラス
-                mCV.鏡面反射光除去(入力画像, ref 出力画像);
-                if(!(gaussian==0))Cv.Smooth(出力画像, 出力画像, SmoothType.Gaussian, gaussian);//ガウシアンフィルタ
-                mCV.コントラスト調整(ref 出力画像,(double)trackBar_cont.Value/10.0);
-                mCV.brightness(ref 出力画像, bright);
-            }
-            else Console.WriteLine("no 4 images");
-            Console.WriteLine("OnClick自作　終了");
+            自作プロセス実行();
         }
         private void OnClick実行(object sender, EventArgs e)
         {
