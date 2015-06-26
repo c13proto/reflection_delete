@@ -34,7 +34,7 @@ namespace 鏡面反射光除去処理
         }
         private void 自作プロセス実行()
         {
-            Console.WriteLine("自作プロセス開始");
+            System.Diagnostics.Debug.WriteLine("自作プロセス開始");
             if (is4Image)
             {
                 int width = 入力画像[0].Width;
@@ -47,8 +47,8 @@ namespace 鏡面反射光除去処理
                 mCV.brightness(ref 出力画像, bright);
                 pictureBoxIpl1.ImageIpl = 出力画像;
             }
-            else Console.WriteLine("no 4 images");
-            Console.WriteLine("自作プロセス終了");
+            else System.Diagnostics.Debug.WriteLine("no 4 images");
+            System.Diagnostics.Debug.WriteLine("自作プロセス終了");
  
         }
         private void OnClick自作(object sender, EventArgs e)
@@ -57,7 +57,7 @@ namespace 鏡面反射光除去処理
         }
         private void OnClick実行(object sender, EventArgs e)
         {
-            Console.WriteLine("OnClick実行　開始");
+            System.Diagnostics.Debug.WriteLine("OnClick実行　開始");
             if (is4Image)
             {
 
@@ -106,8 +106,8 @@ namespace 鏡面反射光除去処理
                 出力画像=DCT_dst.Clone();
                 
             }
-            else Console.WriteLine("no 4 images");
-            Console.WriteLine("OnClick実行　終了");
+            else System.Diagnostics.Debug.WriteLine("no 4 images");
+            System.Diagnostics.Debug.WriteLine("OnClick実行　終了");
         }
 
         private void OnClick開く(object sender, EventArgs e)
@@ -247,7 +247,7 @@ namespace 鏡面反射光除去処理
             {
                 //OKボタンがクリックされたとき
                 //選択されたファイル名を表示する
-                Console.WriteLine(sfd.FileName);
+                System.Diagnostics.Debug.WriteLine(sfd.FileName);
                 pictureBoxIpl1.ImageIpl.SaveImage(sfd.FileName);
             }
         }
