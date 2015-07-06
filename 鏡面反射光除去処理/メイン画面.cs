@@ -23,14 +23,10 @@ namespace 鏡面反射光除去処理
         public static IplImage 出力画像;
         public static Boolean is4Image = false;
 
-        public static int gaussian;
-        public static int bright;
 
         public メイン画面()
         {
             InitializeComponent();
-            gaussian = int.Parse(textBox_Gaus.Text);
-            bright = int.Parse(textBox_Bright.Text);
         }
         private void 自作プロセス実行()
         {
@@ -42,9 +38,9 @@ namespace 鏡面反射光除去処理
                 出力画像 = Cv.CreateImage(new CvSize(width, height), BitDepth.U8, 1);//メディアンのみ
                 manualCV mCV = new manualCV();//メディアンフィルタかけるためのクラス
                 mCV.鏡面反射光除去(入力画像, ref 出力画像);
-                if (!(gaussian == 0)) Cv.Smooth(出力画像, 出力画像, SmoothType.Gaussian, gaussian);//ガウシアンフィルタ
-                mCV.コントラスト調整(ref 出力画像, (double)trackBar_cont.Value / 10.0);
-                mCV.brightness(ref 出力画像, bright);
+                if (!( int.Parse(textBox_Gaus.Text) == 0)) Cv.Smooth(出力画像, 出力画像, SmoothType.Gaussian,  int.Parse(textBox_Gaus.Text));//ガウシアンフィルタ
+                mCV.コントラスト調整(ref 出力画像, double.Parse(textBox_Cont.Text));
+                mCV.brightness(ref 出力画像, double.Parse(textBox_Bright.Text));
                 pictureBoxIpl1.ImageIpl = 出力画像;
             }
             else System.Diagnostics.Debug.WriteLine("no 4 images");
@@ -233,7 +229,7 @@ namespace 鏡面反射光除去処理
         {
             System.IO.Directory.CreateDirectory(@"result");//resultフォルダの作成
             SaveFileDialog sfd = new SaveFileDialog();//SaveFileDialogクラスのインスタンスを作成
-            sfd.FileName = gaussian.ToString()+"_"+bright.ToString();//はじめのファイル名を指定する
+            sfd.FileName =  textBox_Gaus.Text+"_"+textBox_Bright.Text+"_"+textBox_Cont.Text;//はじめのファイル名を指定する
             sfd.InitialDirectory = @"result\";//はじめに表示されるフォルダを指定する
             sfd.Filter ="画像ファイル|*.bmp;*.gif;*.jpg;*.png|全てのファイル|*.*";//[ファイルの種類]に表示される選択肢を指定する
             sfd.FilterIndex = 1;//[ファイルの種類]ではじめに「画像ファイル」が選択されているようにする
@@ -252,26 +248,16 @@ namespace 鏡面反射光除去処理
             }
         }
 
-        private void TextChanged_Gaus(object sender, EventArgs e)
-        {
-            gaussian = int.Parse(textBox_Gaus.Text);
-        }
-
-        private void TextChanged_Bright(object sender, EventArgs e)
-        {
-            bright = int.Parse(textBox_Bright.Text);
-        }
-
         private void ValueChanged_cont(object sender, EventArgs e)
         {
-            textBox_cont.Text = (trackBar_cont.Value / 10.0).ToString();
+            textBox_Cont.Text = (trackBar_cont.Value / 10.0).ToString();
             自作プロセス実行();
         }
 
         private void TectChanged_cont(object sender, EventArgs e)
         {
             double isnumber;
-            if (double.TryParse(textBox_cont.Text, out isnumber))
+            if (double.TryParse(textBox_Cont.Text, out isnumber))
                 if (isnumber >= trackBar_cont.Minimum*10 && isnumber <= trackBar_cont.Maximum*10)
                     trackBar_cont.Value = (int)isnumber*10;
         }

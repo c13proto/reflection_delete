@@ -47,7 +47,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.trackBar_cont = new System.Windows.Forms.TrackBar();
-            this.textBox_cont = new System.Windows.Forms.TextBox();
+            this.textBox_Cont = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIpl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_選択)).BeginInit();
@@ -197,7 +197,6 @@
             this.textBox_Gaus.Size = new System.Drawing.Size(30, 19);
             this.textBox_Gaus.TabIndex = 14;
             this.textBox_Gaus.Text = "0";
-            this.textBox_Gaus.TextChanged += new System.EventHandler(this.TextChanged_Gaus);
             // 
             // textBox_Bright
             // 
@@ -206,7 +205,6 @@
             this.textBox_Bright.Size = new System.Drawing.Size(30, 19);
             this.textBox_Bright.TabIndex = 15;
             this.textBox_Bright.Text = "100";
-            this.textBox_Bright.TextChanged += new System.EventHandler(this.TextChanged_Bright);
             // 
             // label1
             // 
@@ -238,14 +236,13 @@
             this.trackBar_cont.Value = 40;
             this.trackBar_cont.ValueChanged += new System.EventHandler(this.ValueChanged_cont);
             // 
-            // textBox_cont
+            // textBox_Cont
             // 
-            this.textBox_cont.Location = new System.Drawing.Point(56, 274);
-            this.textBox_cont.Name = "textBox_cont";
-            this.textBox_cont.Size = new System.Drawing.Size(28, 19);
-            this.textBox_cont.TabIndex = 19;
-            this.textBox_cont.Text = "4.0";
-            this.textBox_cont.TextChanged += new System.EventHandler(this.TectChanged_cont);
+            this.textBox_Cont.Location = new System.Drawing.Point(56, 274);
+            this.textBox_Cont.Name = "textBox_Cont";
+            this.textBox_Cont.Size = new System.Drawing.Size(28, 19);
+            this.textBox_Cont.TabIndex = 19;
+            this.textBox_Cont.Text = "4.0";
             // 
             // label3
             // 
@@ -263,7 +260,7 @@
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(471, 333);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox_cont);
+            this.Controls.Add(this.textBox_Cont);
             this.Controls.Add(this.trackBar_cont);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -314,7 +311,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TrackBar trackBar_cont;
-        private System.Windows.Forms.TextBox textBox_cont;
+        private System.Windows.Forms.TextBox textBox_Cont;
         private System.Windows.Forms.Label label3;
     }
 }
