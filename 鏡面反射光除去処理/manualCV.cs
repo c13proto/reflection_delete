@@ -30,7 +30,22 @@ namespace 鏡面反射光除去処理
             //for (int num = 0; num < 4; num++)images[num].Dispose();元のものに影響するっぽい
 
         }
-        public void コントラスト調整(ref IplImage src,double 倍率)
+        public void コントラスト調整_シグモイド(ref IplImage src,double 倍率)
+        {
+            int width = src.Width;
+            int height = src.Height;
+
+            for (int x = 0; x < width; x++)
+                for (int y = 0; y < height; y++)
+                {
+                    CvScalar cs = Cv.Get2D(src, y, x);
+                    cs.Val0 = 255.0 / (1 + Math.Exp(-倍率 * (cs.Val0 - 128) / 255)); 
+                    Cv.Set2D(src, y, x, cs);
+                }
+            //for (int num = 0; num < 4; num++)images[num].Dispose();元のものに影響するっぽい
+
+        }
+        public void コントラスト調整(ref IplImage src, double 倍率)
         {
             int width = src.Width;
             int height = src.Height;
