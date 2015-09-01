@@ -53,8 +53,11 @@ namespace 鏡面反射光除去処理
             for (int x = 0; x < width; x++)
                 for (int y = 0; y < height; y++)
                 {
+                    double val;
                     CvScalar cs = Cv.Get2D(src, y, x);
-                    cs.Val0 *= 倍率;
+                    val = cs.Val0 * 倍率;
+                    if (val > 255) cs.Val0 = 255;
+                    else cs.Val0 = val;
                     Cv.Set2D(src, y, x, cs);
                 }
             //for (int num = 0; num < 4; num++)images[num].Dispose();元のものに影響するっぽい
