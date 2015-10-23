@@ -41,7 +41,7 @@ namespace 鏡面反射光除去処理
                 if (!( int.Parse(textBox_Gaus.Text) == 0)) Cv.Smooth(出力画像, 出力画像, SmoothType.Gaussian,  int.Parse(textBox_Gaus.Text));//ガウシアンフィルタ
                 mCV.コントラスト調整(ref 出力画像, double.Parse(textBox_Cont.Text));
                 //mCV.コントラスト調整_シグモイド(ref 出力画像, double.Parse(textBox_Cont.Text));
-                mCV.brightness(ref 出力画像, double.Parse(textBox_Bright.Text));
+                if (textBox_Bright.Text != "0") mCV.brightness(ref 出力画像, double.Parse(textBox_Bright.Text));
                 pictureBoxIpl1.ImageIpl = 出力画像;
             }
             else System.Diagnostics.Debug.WriteLine("no 4 images");

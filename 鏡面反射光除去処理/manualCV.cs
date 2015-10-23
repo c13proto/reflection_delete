@@ -88,8 +88,8 @@ namespace 鏡面反射光除去処理
 
             int width = img.Width;
             int height = img.Height;
-            int center_x = width /5;
-            int center_y = height /5;
+            int center_x = width /2;
+            int center_y = height /2;
 
             double[] vals= new double[9];
             double average=0;
