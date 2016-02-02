@@ -120,3 +120,4 @@ C:\Users\idry7lash629\Documents\GitHub\C_sharp\reflection_delete\鏡面反射光
 C:\Users\idry7lash629\Documents\GitHub\C_sharp\reflection_delete\鏡面反射光除去処理\obj\x64\Debug\鏡面反射光除去処理.メイン画面.resources
 C:\Users\idry7lash629\Documents\GitHub\C_sharp\reflection_delete\鏡面反射光除去処理\obj\x64\Debug\鏡面反射光除去処理.Properties.Resources.resources
 C:\Users\idry7lash629\Documents\GitHub\C_sharp\reflection_delete\鏡面反射光除去処理\obj\x64\Debug\鏡面反射光除去処理.csproj.GenerateResource.Cache
+C:\Users\yamamuro\Documents\GitHub\C_sharp\reflection_delete\鏡面反射光除去処理\obj\x64\Debug\鏡面反射光除去処理.照度差ステレオ法.resources

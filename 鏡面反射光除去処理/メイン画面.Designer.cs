@@ -49,6 +49,7 @@
             this.trackBar_cont = new System.Windows.Forms.TrackBar();
             this.textBox_Cont = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.button_照度差 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIpl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_選択)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_cont)).BeginInit();
@@ -56,9 +57,10 @@
             // 
             // pictureBoxIpl1
             // 
-            this.pictureBoxIpl1.Location = new System.Drawing.Point(95, 1);
+            this.pictureBoxIpl1.Location = new System.Drawing.Point(96, 1);
             this.pictureBoxIpl1.Name = "pictureBoxIpl1";
-            this.pictureBoxIpl1.Size = new System.Drawing.Size(361, 323);
+            this.pictureBoxIpl1.Size = new System.Drawing.Size(411, 421);
+            this.pictureBoxIpl1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBoxIpl1.TabIndex = 0;
             this.pictureBoxIpl1.TabStop = false;
             this.pictureBoxIpl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OnClick_pictureBoxIpl1);
@@ -124,7 +126,7 @@
             // 
             this.button_実行.Location = new System.Drawing.Point(3, 152);
             this.button_実行.Name = "button_実行";
-            this.button_実行.Size = new System.Drawing.Size(66, 23);
+            this.button_実行.Size = new System.Drawing.Size(80, 23);
             this.button_実行.TabIndex = 7;
             this.button_実行.Text = "実行";
             this.button_実行.UseVisualStyleBackColor = true;
@@ -174,15 +176,15 @@
             // 
             this.button_自作.Location = new System.Drawing.Point(3, 181);
             this.button_自作.Name = "button_自作";
-            this.button_自作.Size = new System.Drawing.Size(66, 23);
+            this.button_自作.Size = new System.Drawing.Size(80, 23);
             this.button_自作.TabIndex = 12;
-            this.button_自作.Text = "自作";
+            this.button_自作.Text = "3平均";
             this.button_自作.UseVisualStyleBackColor = true;
             this.button_自作.Click += new System.EventHandler(this.OnClick自作);
             // 
             // button_保存
             // 
-            this.button_保存.Location = new System.Drawing.Point(6, 299);
+            this.button_保存.Location = new System.Drawing.Point(8, 332);
             this.button_保存.Name = "button_保存";
             this.button_保存.Size = new System.Drawing.Size(66, 23);
             this.button_保存.TabIndex = 13;
@@ -192,7 +194,7 @@
             // 
             // textBox_Gaus
             // 
-            this.textBox_Gaus.Location = new System.Drawing.Point(3, 210);
+            this.textBox_Gaus.Location = new System.Drawing.Point(5, 243);
             this.textBox_Gaus.Name = "textBox_Gaus";
             this.textBox_Gaus.Size = new System.Drawing.Size(30, 19);
             this.textBox_Gaus.TabIndex = 14;
@@ -200,7 +202,7 @@
             // 
             // textBox_Bright
             // 
-            this.textBox_Bright.Location = new System.Drawing.Point(3, 235);
+            this.textBox_Bright.Location = new System.Drawing.Point(5, 268);
             this.textBox_Bright.Name = "textBox_Bright";
             this.textBox_Bright.Size = new System.Drawing.Size(30, 19);
             this.textBox_Bright.TabIndex = 15;
@@ -209,7 +211,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(52, 213);
+            this.label1.Location = new System.Drawing.Point(54, 246);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(31, 12);
             this.label1.TabIndex = 16;
@@ -218,7 +220,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(52, 238);
+            this.label2.Location = new System.Drawing.Point(54, 271);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(36, 12);
             this.label2.TabIndex = 17;
@@ -227,7 +229,7 @@
             // trackBar_cont
             // 
             this.trackBar_cont.AutoSize = false;
-            this.trackBar_cont.Location = new System.Drawing.Point(-3, 274);
+            this.trackBar_cont.Location = new System.Drawing.Point(-1, 307);
             this.trackBar_cont.Maximum = 80;
             this.trackBar_cont.Minimum = 10;
             this.trackBar_cont.Name = "trackBar_cont";
@@ -238,7 +240,7 @@
             // 
             // textBox_Cont
             // 
-            this.textBox_Cont.Location = new System.Drawing.Point(56, 274);
+            this.textBox_Cont.Location = new System.Drawing.Point(58, 307);
             this.textBox_Cont.Name = "textBox_Cont";
             this.textBox_Cont.Size = new System.Drawing.Size(28, 19);
             this.textBox_Cont.TabIndex = 19;
@@ -248,18 +250,29 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1, 257);
+            this.label3.Location = new System.Drawing.Point(3, 290);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 12);
             this.label3.TabIndex = 20;
             this.label3.Text = "コントラスト";
+            // 
+            // button_照度差
+            // 
+            this.button_照度差.Location = new System.Drawing.Point(3, 210);
+            this.button_照度差.Name = "button_照度差";
+            this.button_照度差.Size = new System.Drawing.Size(80, 23);
+            this.button_照度差.TabIndex = 21;
+            this.button_照度差.Text = "照度差";
+            this.button_照度差.UseVisualStyleBackColor = true;
+            this.button_照度差.Click += new System.EventHandler(this.Click_照度差ステレオ);
             // 
             // メイン画面
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(471, 333);
+            this.ClientSize = new System.Drawing.Size(498, 366);
+            this.Controls.Add(this.button_照度差);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox_Cont);
             this.Controls.Add(this.trackBar_cont);
@@ -314,6 +327,7 @@
         private System.Windows.Forms.TrackBar trackBar_cont;
         private System.Windows.Forms.TextBox textBox_Cont;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button_照度差;
     }
 }
 

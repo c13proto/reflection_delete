@@ -2162,7 +2162,7 @@
             <param name="flags">処理モード</param>
             <returns>CvAvgCompを要素とするCvSeq</returns>
         </member>
-        <member name="M:OpenCvSharp.CvArr.HaarDetectObjects(OpenCvSharp.CvHaarClassifierCascade,OpenCvSharp.CvMemStorage,System.Double,System.Int32,OpenCvSharp.HaarDetectionType,OpenCvSharp.CvSize)">
+        <member name="M:OpenCvSharp.CvArr.HaarDetectObjects(OpenCvSharp.CvHaarClassifierCascade,OpenCvSharp.CvMemStorage,System.Double,System.Int32,OpenCvSharp.HaarDetectionType,OpenCvSharp.CvSize,OpenCvSharp.CvSize)">
             <summary>
             与えられた画像からオブジェクトを含む様な矩形領域を検出し，それらの領域を矩形の列として返す．
             </summary>
@@ -2172,6 +2172,7 @@
             <param name="minNeighbors">（これから 1 を引いた値が）オブジェクトを構成する近傍矩形の最小数となる． min_neighbors-1 よりも少ない矩形しか含まないようなグループは全て棄却される． もし min_neighbors が 0 である場合，この関数はグループを一つも生成せず，候補となる矩形を全て返す．これはユーザがカスタマイズしたグループ化処理を適用したい場合に有用である． </param>
             <param name="flags">処理モード</param>
             <param name="minSize">最小ウィンドウサイズ．デフォルトでは分類器の学習に用いられたサンプルのサイズが設定される（顔検出の場合は，~20×20）.</param>
+            <param name="maxSize">最大ウィンドウサイズ. </param>
             <returns>CvAvgCompを要素とするCvSeq</returns>
         </member>
         <member name="M:OpenCvSharp.CvArr.HoughCircles(OpenCvSharp.CvMemStorage,OpenCvSharp.HoughCirclesMethod,System.Double,System.Double)">
@@ -6292,6 +6293,21 @@
             <param name="translationVectors">出力される3xMの並進ベクトルの配列．</param>
             <param name="flags">処理フラグ</param>
         </member>
+        <member name="M:OpenCvSharp.Cv.CalibrateCamera2(OpenCvSharp.CvMat,OpenCvSharp.CvMat,OpenCvSharp.CvMat,OpenCvSharp.CvSize,OpenCvSharp.CvMat,OpenCvSharp.CvMat,OpenCvSharp.CvMat,OpenCvSharp.CvMat,OpenCvSharp.CalibrationFlag,System.Double@)">
+            <summary>
+            内部パラメータと各画像に対する 外部パラメータを推定する．
+            </summary>
+            <param name="objectPoints">オブジェクト（キャリブレーションパターン）上の点群座標の結合行列．3xN または Nx3の配列．Nはすべてのビューでの点の数の合計である.</param>
+            <param name="imagePoints">対応する画像上の点群座標の結合行列． 2xN またはNx2 の配列．Nはすべてのビューでの点の数の合計である．</param>
+            <param name="pointCounts">それぞれのビューに含まれる点の数を表すベクトル．サ イズは 1xM または Mx1 でMはビューの数．1xM or Mx1</param>
+            <param name="imageSize">画像サイズ．内部カメラ行列の初期化のみに用いられる.</param>
+            <param name="intrinsicMatrix">出力されるカメラ行列 (A) [fx 0 cx; 0 fy cy; 0 0 1]. CV_CALIB_USE_INTRINSIC_GUESS  や CV_CALIB_FIX_ASPECT_RATION が指定され た場合，fx, fy, cx, cyのパラメータのうち いくつか，またはすべてを初期化する必要がある．</param>
+            <param name="distortionCoeffs">出力される1x4のひずみ係数ベクトル [k1, k2, p1, p2]. </param>
+            <param name="rotationVectors">出力される3xMの回転ベクトルの配列 (コンパクトな回転行列の表記についてはcvRodrigues2を参照)．</param>
+            <param name="translationVectors">出力される3xMの並進ベクトルの配列．</param>
+            <param name="flags">処理フラグ</param>
+            <param name="reprojectionError">The function outputs the final re-projection error.</param>
+        </member>
         <member name="M:OpenCvSharp.Cv.CalibrationMatrixValues(OpenCvSharp.CvMat,OpenCvSharp.CvSize)">
             <summary>
             様々なカメラ特性を計算する
@@ -8247,59 +8263,6 @@
             <param name="rotationVector">出力される 3x1 の回転ベクトル</param>
             <param name="translationVector">出力される 3x1 の並進ベクトル</param>
             <param name="useExtrinsicGuess"></param>
-        </member>
-        <member name="M:OpenCvSharp.Cv.FindExtrinsicCameraParams2Cs(OpenCvSharp.CvMat,OpenCvSharp.CvMat,OpenCvSharp.CvMat,OpenCvSharp.CvMat,OpenCvSharp.CvMat,OpenCvSharp.CvMat)">
-            <summary>
-            既知の内部パラメータを用いて，それぞれのビューにおける外部パラメータを推定する．
-            3次元のオブジェクトの点とそれに対応する２次元投影点が指定されなければならない．この関数も逆投影誤差の最小化を行う．
-            </summary>
-            <param name="objectPoints">オブジェクトの点の配列．3xNまたはNx3でNはビューにおける点の数．</param>
-            <param name="imagePoints">対応する画像上の点の配列．2xNまたはNx2でNはビューにおける点の数．</param>
-            <param name="cameraMatrix">カメラ内部行列 (A) [fx 0 cx; 0 fy cy; 0 0 1]. </param>
-            <param name="distCoeffs">歪み係数のベクトル．4x1または1x4 [k1, k2, p1, p2]．nullの場合，歪み係数はすべて0 であるとする．</param>
-            <param name="rvec">出力される 3x1 の回転ベクトル</param>
-            <param name="tvec">出力される 3x1 の並進ベクトル</param>
-        </member>
-        <member name="M:OpenCvSharp.Cv.FindExtrinsicCameraParams2Cs(OpenCvSharp.CvMat,OpenCvSharp.CvMat,OpenCvSharp.CvMat,OpenCvSharp.CvMat,OpenCvSharp.CvMat,OpenCvSharp.CvMat,System.Boolean)">
-            <summary>
-            既知の内部パラメータを用いて，それぞれのビューにおける外部パラメータを推定する．
-            3次元のオブジェクトの点とそれに対応する２次元投影点が指定されなければならない．この関数も逆投影誤差の最小化を行う．
-            </summary>
-            <param name="objectPoints">オブジェクトの点の配列．3xNまたはNx3でNはビューにおける点の数．</param>
-            <param name="imagePoints">対応する画像上の点の配列．2xNまたはNx2でNはビューにおける点の数．</param>
-            <param name="cameraMatrix">カメラ内部行列 (A) [fx 0 cx; 0 fy cy; 0 0 1]. </param>
-            <param name="distCoeffs">歪み係数のベクトル．4x1または1x4 [k1, k2, p1, p2]．nullの場合，歪み係数はすべて0 であるとする．</param>
-            <param name="rvec">出力される 3x1 の回転ベクトル</param>
-            <param name="tvec">出力される 3x1 の並進ベクトル</param>
-            <param name="useExtrinsicGuess"></param>
-        </member>
-        <member name="M:OpenCvSharp.Cv.UndistortPoints_(OpenCvSharp.CvMat,OpenCvSharp.CvMat,OpenCvSharp.CvMat,OpenCvSharp.CvMat,OpenCvSharp.CvMat,OpenCvSharp.CvMat)">
-            <summary>
-            
-            </summary>
-            <param name="_src"></param>
-            <param name="_dst"></param>
-            <param name="_cameraMatrix"></param>
-            <param name="_distCoeffs"></param>
-            <param name="matR"></param>
-            <param name="matP"></param>
-        </member>
-        <member name="M:OpenCvSharp.Cv.FindHomography_(OpenCvSharp.CvMat,OpenCvSharp.CvMat,OpenCvSharp.CvMat)">
-            <summary>
-            
-            </summary>
-            <param name="objectPoints"></param>
-            <param name="imagePoints"></param>
-            <param name="__H"></param>
-            <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.Cv.Rodrigues2_(OpenCvSharp.CvMat,OpenCvSharp.CvMat)">
-            <summary>
-            
-            </summary>
-            <param name="src"></param>
-            <param name="dst"></param>
-            <returns></returns>
         </member>
         <member name="M:OpenCvSharp.Cv.FindFace(OpenCvSharp.IplImage,OpenCvSharp.CvMemStorage)">
             <summary>
@@ -15277,7 +15240,7 @@
             <param name="flags">処理モード</param>
             <returns>CvAvgCompを要素とするCvSeq</returns>
         </member>
-        <member name="M:OpenCvSharp.Cv.HaarDetectObjects(OpenCvSharp.CvArr,OpenCvSharp.CvHaarClassifierCascade,OpenCvSharp.CvMemStorage,System.Double,System.Int32,OpenCvSharp.HaarDetectionType,OpenCvSharp.CvSize)">
+        <member name="M:OpenCvSharp.Cv.HaarDetectObjects(OpenCvSharp.CvArr,OpenCvSharp.CvHaarClassifierCascade,OpenCvSharp.CvMemStorage,System.Double,System.Int32,OpenCvSharp.HaarDetectionType,OpenCvSharp.CvSize,OpenCvSharp.CvSize)">
             <summary>
             与えられた画像からオブジェクトを含む様な矩形領域を検出し，それらの領域を矩形の列として返す．
             </summary>
@@ -15288,6 +15251,7 @@
             <param name="minNeighbors">（これから 1 を引いた値が）オブジェクトを構成する近傍矩形の最小数となる． min_neighbors-1 よりも少ない矩形しか含まないようなグループは全て棄却される． もし min_neighbors が 0 である場合，この関数はグループを一つも生成せず，候補となる矩形を全て返す．これはユーザがカスタマイズしたグループ化処理を適用したい場合に有用である． </param>
             <param name="flags">処理モード</param>
             <param name="minSize">最小ウィンドウサイズ．デフォルトでは分類器の学習に用いられたサンプルのサイズが設定される（顔検出の場合は，~20×20）.</param>
+            <param name="maxSize">探索窓の最大サイズ．デフォルトでは，画像サイズに設定されます．</param>
             <returns>CvAvgCompを要素とするCvSeq</returns>
         </member>
         <member name="M:OpenCvSharp.Cv.HoughCircles(OpenCvSharp.CvArr,OpenCvSharp.CvMemStorage,OpenCvSharp.HoughCirclesMethod,System.Double,System.Double)">
@@ -16067,7 +16031,7 @@
             <summary>
             オブジェクトを解放する
             </summary>
-            <param name="struct_ptr">オブジェクトのポインタのポインタ．</param>
+            <param name="structPtr">オブジェクトのポインタのポインタ．</param>
         </member>
         <member name="M:OpenCvSharp.Cv.Release(OpenCvSharp.ICvPtrHolder@)">
             <summary>
@@ -16299,7 +16263,7 @@
             </summary>
             <param name="arr">入力配列</param>
             <param name="header">書き込まれる出力ヘッダ</param>
-            <param name="new_cn">新しいチャンネル数 ．new_cn = 0はチャンネル数が変更されていないことを意味する．</param>
+            <param name="newCn">新しいチャンネル数 ．new_cn = 0はチャンネル数が変更されていないことを意味する．</param>
             <returns>行列データ</returns>
         </member>
         <member name="M:OpenCvSharp.Cv.Reshape(OpenCvSharp.CvArr,OpenCvSharp.CvMat@,System.Int32,System.Int32)">
@@ -16308,8 +16272,8 @@
             </summary>
             <param name="arr">入力配列</param>
             <param name="header">書き込まれる出力ヘッダ</param>
-            <param name="new_cn">新しいチャンネル数 ．new_cn = 0はチャンネル数が変更されていないことを意味する．</param>
-            <param name="new_rows">新しい行数． new_rows = 0は，行数がnew_cnの値に応じて変更する必要があるのにも関わらず，変更されないままであることを意味する．</param>
+            <param name="newCn">新しいチャンネル数 ．new_cn = 0はチャンネル数が変更されていないことを意味する．</param>
+            <param name="newRows">新しい行数． new_rows = 0は，行数がnew_cnの値に応じて変更する必要があるのにも関わらず，変更されないままであることを意味する．</param>
             <returns>行列データ</returns>
         </member>
         <member name="M:OpenCvSharp.Cv.Reshape(OpenCvSharp.CvArr,OpenCvSharp.CvMat,System.Int32)">
@@ -16318,7 +16282,7 @@
             </summary>
             <param name="arr">入力配列</param>
             <param name="header">書き込まれる出力ヘッダ</param>
-            <param name="new_cn">新しいチャンネル数 ．new_cn = 0はチャンネル数が変更されていないことを意味する．</param>
+            <param name="newCn">新しいチャンネル数 ．new_cn = 0はチャンネル数が変更されていないことを意味する．</param>
             <returns>行列データ</returns>
         </member>
         <member name="M:OpenCvSharp.Cv.Reshape(OpenCvSharp.CvArr,OpenCvSharp.CvMat,System.Int32,System.Int32)">
@@ -16338,11 +16302,11 @@
             </summary>
             <typeparam name="T">出力ヘッダの型</typeparam>
             <param name="arr">入力配列</param>
-            <param name="sizeof_header">IplImageとCvMat，CvMatNDそれぞれの出力ヘッダを区別するための出力ヘッダのサイズ．</param>
+            <param name="sizeofHeader">IplImageとCvMat，CvMatNDそれぞれの出力ヘッダを区別するための出力ヘッダのサイズ．</param>
             <param name="header">書き込まれる出力ヘッダ</param>
-            <param name="new_cn">新しいチャンネル数 ．new_cn = 0はチャンネル数が変更されていないことを意味する．</param>
-            <param name="new_dims">新しい次元数． new_dims = 0は，次元数が同じままであることを意味する．</param>
-            <param name="new_sizes">新しい次元サイズの配列．要素の総数は変化してはいけないので，new_dims-1の値のみ使用される．従って，new_dims = 1であればnew_sizesは使用されない．</param>
+            <param name="newDims">新しいチャンネル数 ．new_cn = 0はチャンネル数が変更されていないことを意味する．</param>
+            <param name="newDims">新しい次元数． new_dims = 0は，次元数が同じままであることを意味する．</param>
+            <param name="newSizes">新しい次元サイズの配列．要素の総数は変化してはいけないので，new_dims-1の値のみ使用される．従って，new_dims = 1であればnew_sizesは使用されない．</param>
             <returns></returns>
         </member>
         <member name="M:OpenCvSharp.Cv.ReshapeND``1(OpenCvSharp.CvArr,``0,System.Int32,System.Int32,System.Int32[])">
@@ -16353,9 +16317,9 @@
             <typeparam name="T">出力ヘッダの型</typeparam>
             <param name="arr">入力配列</param>
             <param name="header">書き込まれる出力ヘッダ</param>
-            <param name="new_cn">新しいチャンネル数 ．new_cn = 0はチャンネル数が変更されていないことを意味する．</param>
-            <param name="new_dims">新しい次元数． new_dims = 0は，次元数が同じままであることを意味する．</param>
-            <param name="new_sizes">新しい次元サイズの配列．要素の総数は変化してはいけないので，new_dims-1の値のみ使用される．従って，new_dims = 1であればnew_sizesは使用されない．</param>
+            <param name="newCn">新しいチャンネル数 ．new_cn = 0はチャンネル数が変更されていないことを意味する．</param>
+            <param name="newDims">新しい次元数． new_dims = 0は，次元数が同じままであることを意味する．</param>
+            <param name="newSizes">新しい次元サイズの配列．要素の総数は変化してはいけないので，new_dims-1の値のみ使用される．従って，new_dims = 1であればnew_sizesは使用されない．</param>
             <returns></returns>
         </member>
         <member name="M:OpenCvSharp.Cv.Resize(OpenCvSharp.CvArr,OpenCvSharp.CvArr)">
@@ -16517,6 +16481,37 @@
             <param name="acc">入力画像と同じチャンネル数のアキュムレータ，32 ビットあるいは 64 ビット浮動小数点型．</param>
             <param name="alpha">入力画像の重み．</param>
             <param name="mask">オプションの処理マスク．</param>
+        </member>
+        <member name="M:OpenCvSharp.Cv.KeepAlive(System.Object)">
+            <summary>
+            References the specified object, which makes it ineligible for garbage collection 
+            from the start of the current routine to the point where this method is called.
+            </summary>
+            <param name="arg1"></param>
+        </member>
+        <member name="M:OpenCvSharp.Cv.KeepAlive(System.Object,System.Object)">
+            <summary>
+            References the specified object, which makes it ineligible for garbage collection 
+            from the start of the current routine to the point where this method is called.
+            </summary>
+            <param name="arg1"></param>
+            <param name="arg2"></param>
+        </member>
+        <member name="M:OpenCvSharp.Cv.KeepAlive(System.Object,System.Object,System.Object)">
+            <summary>
+            References the specified object, which makes it ineligible for garbage collection 
+            from the start of the current routine to the point where this method is called.
+            </summary>
+            <param name="arg1"></param>
+            <param name="arg2"></param>
+            <param name="arg3"></param>
+        </member>
+        <member name="M:OpenCvSharp.Cv.KeepAlive(System.Object[])">
+            <summary>
+            References the specified object, which makes it ineligible for garbage collection 
+            from the start of the current routine to the point where this method is called.
+            </summary>
+            <param name="args"></param>
         </member>
         <member name="M:OpenCvSharp.Cv.ToPtr(OpenCvSharp.ICvPtrHolder)">
             <summary>
@@ -17003,6 +16998,125 @@
             </summary>
             <param name="state"></param>
             <param name="userdata"></param>
+            <returns></returns>
+        </member>
+        <member name="T:OpenCvSharp.EnumerableEx">
+            <summary>
+            IEnumerable&lt;T&gt; extension methods for .NET Framework 2.0 
+            </summary>
+        </member>
+        <member name="M:OpenCvSharp.EnumerableEx.Select``2(System.Collections.Generic.IEnumerable{``0},OpenCvSharp.Func{``0,``1})">
+            <summary>
+            Enumerable.Select
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="enumerable"></param>
+            <param name="selector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.EnumerableEx.SelectToArray``2(System.Collections.Generic.IEnumerable{``0},OpenCvSharp.Func{``0,``1})">
+            <summary>
+            Enumerable.Select -> ToArray
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="enumerable"></param>
+            <param name="selector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.EnumerableEx.SelectToArray``2(System.Collections.IEnumerable,OpenCvSharp.Func{``0,``1})">
+            <summary>
+            Enumerable.Select -> ToArray
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="enumerable"></param>
+            <param name="selector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.EnumerableEx.SelectPtrs(System.Collections.Generic.IEnumerable{OpenCvSharp.ICvPtrHolder})">
+            <summary>
+            Enumerable.Select -> ToArray
+            </summary>
+            <param name="enumerable"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.EnumerableEx.Where``1(System.Collections.Generic.IEnumerable{``0},OpenCvSharp.Func{``0,System.Boolean})">
+            <summary>
+            Enumerable.Where
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="enumerable"></param>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.EnumerableEx.WhereToArray``1(System.Collections.Generic.IEnumerable{``0},OpenCvSharp.Func{``0,System.Boolean})">
+            <summary>
+            Enumerable.Where -> ToArray
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="enumerable"></param>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.EnumerableEx.ToArray``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Enumerable.ToArray
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="enumerable"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.EnumerableEx.Any``1(System.Collections.Generic.IEnumerable{``0},OpenCvSharp.Func{``0,System.Boolean})">
+            <summary>
+            Enumerable.Any
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="enumerable"></param>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.EnumerableEx.AnyNull``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Enumerable.Any
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="enumerable"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.EnumerableEx.All``1(System.Collections.Generic.IEnumerable{``0},OpenCvSharp.Func{``0,System.Boolean})">
+            <summary>
+            Enumerable.All
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="enumerable"></param>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.EnumerableEx.Count``1(System.Collections.Generic.IEnumerable{``0},OpenCvSharp.Func{``0,System.Boolean})">
+            <summary>
+            Enumerable.Count
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="enumerable"></param>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.EnumerableEx.Count``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Enumerable.Count
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="enumerable"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.EnumerableEx.IsEmpty``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="enumerable"></param>
             <returns></returns>
         </member>
         <member name="T:OpenCvSharp.EigenObjectsIOFlag">
@@ -20693,6 +20807,11 @@
             cvConvertImageの処理フラグ
             </summary>
         </member>
+        <member name="F:OpenCvSharp.ConvertImageFlag.None">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="F:OpenCvSharp.ConvertImageFlag.Flip">
             <summary>
             画像を垂直方向に反転 [CV_CVTIMG_FLIP]
@@ -22151,7 +22270,7 @@
             <param name="flags">処理モード</param>
             <returns>CvAvgCompを要素とするCvSeq</returns>
         </member>
-        <member name="M:OpenCvSharp.CvHaarClassifierCascade.HaarDetectObjects(OpenCvSharp.CvArr,OpenCvSharp.CvMemStorage,System.Double,System.Int32,OpenCvSharp.HaarDetectionType,OpenCvSharp.CvSize)">
+        <member name="M:OpenCvSharp.CvHaarClassifierCascade.HaarDetectObjects(OpenCvSharp.CvArr,OpenCvSharp.CvMemStorage,System.Double,System.Int32,OpenCvSharp.HaarDetectionType,OpenCvSharp.CvSize,OpenCvSharp.CvSize)">
             <summary>
             与えられた画像からオブジェクトを含む様な矩形領域を検出し，それらの領域を矩形の列として返す．
             </summary>
@@ -22161,6 +22280,7 @@
             <param name="minNeighbors">（これから 1 を引いた値が）オブジェクトを構成する近傍矩形の最小数となる． min_neighbors-1 よりも少ない矩形しか含まないようなグループは全て棄却される． もし min_neighbors が 0 である場合，この関数はグループを一つも生成せず，候補となる矩形を全て返す．これはユーザがカスタマイズしたグループ化処理を適用したい場合に有用である． </param>
             <param name="flags">処理モード</param>
             <param name="minSize">最小ウィンドウサイズ．デフォルトでは分類器の学習に用いられたサンプルのサイズが設定される（顔検出の場合は，~20×20）.</param>
+            <param name="maxSize"></param>
             <returns>CvAvgCompを要素とするCvSeq</returns>
         </member>
         <member name="M:OpenCvSharp.CvHaarClassifierCascade.Run(OpenCvSharp.CvPoint)">
@@ -24024,21 +24144,10 @@
             <param name="p"></param>
             <param name="isEnabledDispose"></param>
         </member>
-        <member name="M:OpenCvSharp.CvMat.#ctor">
-            <summary>
-            sizeof(CvMat)の分のメモリの割り当てだけ行って初期化
-            </summary>
-        </member>
         <member name="M:OpenCvSharp.CvMat.#ctor(System.Boolean)">
             <summary>
             sizeof(CvMat)の分のメモリの割り当てだけ行って、GC禁止設定で初期化
             </summary>
-        </member>
-        <member name="M:OpenCvSharp.CvMat.MemorySize">
-            <summary>
-            sizeof(CvMat) + mat.data.length 
-            </summary>
-            <returns></returns>
         </member>
         <member name="M:OpenCvSharp.CvMat.FromArray(System.Double[])">
             <summary>
@@ -24520,7 +24629,7 @@
             <param name="prms">画像フォーマット固有の各種パラメータ</param>
             <returns></returns>
         </member>
-        <member name="M:OpenCvSharp.CvMat.GetDataStream(System.String,System.Int32[])">
+        <member name="M:OpenCvSharp.CvMat.GetDataStream">
             <summary>
             dataポインタを指すStreamを取得する (返却値は要Close)
             </summary>
@@ -25700,12 +25809,12 @@
             [IPL_BORDER_REPLICATE]
             </summary>
         </member>
-        <member name="F:OpenCvSharp.BorderType.Reflict">
+        <member name="F:OpenCvSharp.BorderType.Reflect">
             <summary>
             [IPL_BORDER_REFLECT]
             </summary>
         </member>
-        <member name="F:OpenCvSharp.BorderType.Reflict101">
+        <member name="F:OpenCvSharp.BorderType.Reflect101">
             <summary>
             [IPL_BORDER_REFLECT_101]
             </summary>

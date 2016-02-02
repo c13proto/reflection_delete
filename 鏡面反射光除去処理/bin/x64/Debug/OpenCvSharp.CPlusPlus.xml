@@ -36,6 +36,61 @@
             <param name="obj"></param>
             <returns></returns>
         </member>
+        <member name="M:OpenCvSharp.CPlusPlus.Cv2.GroupRectangles(System.Collections.Generic.IList{OpenCvSharp.CPlusPlus.Rect},System.Int32,System.Double)">
+            <summary>
+            Groups the object candidate rectangles.
+            </summary>
+            <param name="rectList"> Input/output vector of rectangles. Output vector includes retained and grouped rectangles.</param>
+            <param name="groupThreshold">Minimum possible number of rectangles minus 1. The threshold is used in a group of rectangles to retain it.</param>
+            <param name="eps"></param>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.Cv2.GroupRectangles(System.Collections.Generic.IList{OpenCvSharp.CPlusPlus.Rect},System.Int32[]@,System.Int32,System.Double)">
+            <summary>
+            Groups the object candidate rectangles.
+            </summary>
+            <param name="rectList"> Input/output vector of rectangles. Output vector includes retained and grouped rectangles.</param>
+            <param name="weights"></param>
+            <param name="groupThreshold">Minimum possible number of rectangles minus 1. The threshold is used in a group of rectangles to retain it.</param>
+            <param name="eps">Relative difference between sides of the rectangles to merge them into a group.</param>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.Cv2.GroupRectangles(System.Collections.Generic.IList{OpenCvSharp.CPlusPlus.Rect},System.Int32,System.Double,System.Int32[]@,System.Double[]@)">
+            <summary>
+            Groups the object candidate rectangles.
+            </summary>
+            <param name="rectList"></param>
+            <param name="groupThreshold"></param>
+            <param name="eps"></param>
+            <param name="weights"></param>
+            <param name="levelWeights"></param>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.Cv2.GroupRectangles(System.Collections.Generic.IList{OpenCvSharp.CPlusPlus.Rect},System.Int32[]@,System.Double[]@,System.Int32,System.Double)">
+            <summary>
+            Groups the object candidate rectangles.
+            </summary>
+            <param name="rectList"></param>
+            <param name="rejectLevels"></param>
+            <param name="levelWeights"></param>
+            <param name="groupThreshold"></param>
+            <param name="eps"></param>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.Cv2.GroupRectanglesMeanshift(System.Collections.Generic.IList{OpenCvSharp.CPlusPlus.Rect},System.Double[]@,System.Double[]@,System.Double,System.Nullable{OpenCvSharp.CPlusPlus.Size})">
+            <summary>
+            
+            </summary>
+            <param name="rectList"></param>
+            <param name="foundWeights"></param>
+            <param name="foundScales"></param>
+            <param name="detectThreshold"></param>
+            <param name="winDetSize"></param>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.Cv2.ClearAndAddRange``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            IListの要素にvaluesを設定する
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <param name="values"></param>
+        </member>
         <member name="M:OpenCvSharp.CPlusPlus.Cv2.FAST(OpenCvSharp.CPlusPlus.InputArray,OpenCvSharp.CPlusPlus.KeyPoint[]@,System.Int32,System.Boolean)">
             <summary>
             detects corners using FAST algorithm by E. Rosten
@@ -105,6 +160,26 @@
             <summary>
             
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.Cv2.ChamferMatching(OpenCvSharp.CPlusPlus.Mat,OpenCvSharp.CPlusPlus.Mat,OpenCvSharp.CPlusPlus.Point[][]@,System.Single[]@,System.Double,System.Int32,System.Double,System.Int32,System.Int32,System.Int32,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="img"></param>
+            <param name="templ"></param>
+            <param name="results"></param>
+            <param name="cost"></param>
+            <param name="templScale"></param>
+            <param name="maxMatches"></param>
+            <param name="minMatchDistance"></param>
+            <param name="padX"></param>
+            <param name="padY"></param>
+            <param name="scales"></param>
+            <param name="minScale"></param>
+            <param name="maxScale"></param>
+            <param name="orientationWeight"></param>
+            <param name="truncate"></param>
             <returns></returns>
         </member>
         <member name="M:OpenCvSharp.CPlusPlus.Cv2.ApplyColorMap(OpenCvSharp.CPlusPlus.InputArray,OpenCvSharp.CPlusPlus.OutputArray,OpenCvSharp.CPlusPlus.ColorMapMode)">
@@ -303,6 +378,25 @@
             <returns>Number of iterations CAMSHIFT took to converge.</returns>
         </member>
         <member name="M:OpenCvSharp.CPlusPlus.Cv2.BuildOpticalFlowPyramid(OpenCvSharp.CPlusPlus.InputArray,OpenCvSharp.CPlusPlus.OutputArray,OpenCvSharp.CPlusPlus.Size,System.Int32,System.Boolean,OpenCvSharp.BorderType,OpenCvSharp.BorderType,System.Boolean)">
+            <summary>
+            Constructs a pyramid which can be used as input for calcOpticalFlowPyrLK
+            </summary>
+            <param name="img">8-bit input image.</param>
+            <param name="pyramid">output pyramid.</param>
+            <param name="winSize">window size of optical flow algorithm. 
+            Must be not less than winSize argument of calcOpticalFlowPyrLK(). 
+            It is needed to calculate required padding for pyramid levels.</param>
+            <param name="maxLevel">0-based maximal pyramid level number.</param>
+            <param name="withDerivatives">set to precompute gradients for the every pyramid level. 
+            If pyramid is constructed without the gradients then calcOpticalFlowPyrLK() will 
+            calculate them internally.</param>
+            <param name="pyrBorder">the border mode for pyramid layers.</param>
+            <param name="derivBorder">the border mode for gradients.</param>
+            <param name="tryReuseInputImage">put ROI of input image into the pyramid if possible. 
+            You can pass false to force data copying.</param>
+            <returns>number of levels in constructed pyramid. Can be less than maxLevel.</returns>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.Cv2.BuildOpticalFlowPyramid(OpenCvSharp.CPlusPlus.InputArray,OpenCvSharp.CPlusPlus.Mat[]@,OpenCvSharp.CPlusPlus.Size,System.Int32,System.Boolean,OpenCvSharp.BorderType,OpenCvSharp.BorderType,System.Boolean)">
             <summary>
             Constructs a pyramid which can be used as input for calcOpticalFlowPyrLK
             </summary>
@@ -990,7 +1084,7 @@
             <param name="criteria">Termination criteria for the iterative optimization algorithm.</param>
             <returns></returns>
         </member>
-        <member name="M:OpenCvSharp.CPlusPlus.Cv2.CalibrateCamera(System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{OpenCvSharp.CPlusPlus.Point3d}},System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{OpenCvSharp.CPlusPlus.Point2d}},OpenCvSharp.CPlusPlus.Size,System.Double[0:,0:],System.Double[],OpenCvSharp.CPlusPlus.Vec3d[]@,OpenCvSharp.CPlusPlus.Vec3d[]@,OpenCvSharp.CalibrationFlag,System.Nullable{OpenCvSharp.CPlusPlus.TermCriteria})">
+        <member name="M:OpenCvSharp.CPlusPlus.Cv2.CalibrateCamera(System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{OpenCvSharp.CPlusPlus.Point3f}},System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{OpenCvSharp.CPlusPlus.Point2f}},OpenCvSharp.CPlusPlus.Size,System.Double[0:,0:],System.Double[],OpenCvSharp.CPlusPlus.Vec3d[]@,OpenCvSharp.CPlusPlus.Vec3d[]@,OpenCvSharp.CalibrationFlag,System.Nullable{OpenCvSharp.CPlusPlus.TermCriteria})">
             <summary>
             finds intrinsic and extrinsic camera parameters from several fews of a known calibration pattern.
             </summary>
@@ -1676,6 +1770,14 @@
             </summary>
             <param name="windowName">Name of the window. </param>
             <param name="onMouse">Reference to the function to be called every time mouse event occurs in the specified window. </param>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.Cv2.ConvertImage(OpenCvSharp.CPlusPlus.Mat,OpenCvSharp.CPlusPlus.Mat,OpenCvSharp.ConvertImageFlag)">
+            <summary>
+            utility function: convert one image to another with optional vertical flip
+            </summary>
+            <param name="src"></param>
+            <param name="dst"></param>
+            <param name="flags"></param>
         </member>
         <member name="M:OpenCvSharp.CPlusPlus.Cv2.SetNumThreads(System.Int32)">
             <summary>
@@ -4051,7 +4153,7 @@
             If image is WxH and templ is wxh then result will be (W-w+1) x (H-h+1).</param>
             <param name="method">Specifies the comparison method</param>
         </member>
-        <member name="M:OpenCvSharp.CPlusPlus.Cv2.FindContours(OpenCvSharp.CPlusPlus.InputOutputArray,OpenCvSharp.CPlusPlus.Point[][]@,OpenCvSharp.CPlusPlus.HiearchyIndex[]@,OpenCvSharp.ContourRetrieval,OpenCvSharp.ContourChain,System.Nullable{OpenCvSharp.CPlusPlus.Point})">
+        <member name="M:OpenCvSharp.CPlusPlus.Cv2.FindContours(OpenCvSharp.CPlusPlus.InputOutputArray,OpenCvSharp.CPlusPlus.Point[][]@,OpenCvSharp.CPlusPlus.HierarchyIndex[]@,OpenCvSharp.ContourRetrieval,OpenCvSharp.ContourChain,System.Nullable{OpenCvSharp.CPlusPlus.Point})">
             <summary>
             Finds contours in a binary image.
             </summary>
@@ -4113,7 +4215,7 @@
             This is useful if the contours are extracted from the image ROI and then they should be analyzed in the whole image context.</param>
             <returns>Detected contours. Each contour is stored as a vector of points.</returns>
         </member>
-        <member name="M:OpenCvSharp.CPlusPlus.Cv2.DrawContours(OpenCvSharp.CPlusPlus.InputOutputArray,System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{OpenCvSharp.CPlusPlus.Point}},System.Int32,OpenCvSharp.CPlusPlus.Scalar,System.Int32,OpenCvSharp.LineType,System.Collections.Generic.IEnumerable{OpenCvSharp.CPlusPlus.HiearchyIndex},System.Int32,System.Nullable{OpenCvSharp.CPlusPlus.Point})">
+        <member name="M:OpenCvSharp.CPlusPlus.Cv2.DrawContours(OpenCvSharp.CPlusPlus.InputOutputArray,System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{OpenCvSharp.CPlusPlus.Point}},System.Int32,OpenCvSharp.CPlusPlus.Scalar,System.Int32,OpenCvSharp.LineType,System.Collections.Generic.IEnumerable{OpenCvSharp.CPlusPlus.HierarchyIndex},System.Int32,System.Nullable{OpenCvSharp.CPlusPlus.Point})">
             <summary>
             draws contours in the image
             </summary>
@@ -5220,6 +5322,12 @@
             <param name="fs"></param>
             <returns></returns>
         </member>
+        <member name="M:OpenCvSharp.CPlusPlus.FileStorage.ToLegacy">
+            <summary>
+            Returns pointer to the underlying C FileStorage structure
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:OpenCvSharp.CPlusPlus.FileStorage.WriteRaw(System.String,System.IntPtr,System.Int64)">
             <summary>
             Writes one or more numbers of the specified format to the currently written structure
@@ -5325,6 +5433,19 @@
             Returns the node content as text string
             </summary>
             <param name="node"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.FileNode.op_Explicit(OpenCvSharp.CPlusPlus.FileNode)~OpenCvSharp.CvFileNode">
+            <summary>
+            Returns pointer to the underlying C FileStorage structure
+            </summary>
+            <param name="fs"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.FileNode.ToLegacy">
+            <summary>
+            Returns pointer to the underlying C FileStorage structure
+            </summary>
             <returns></returns>
         </member>
         <member name="M:OpenCvSharp.CPlusPlus.FileNode.ReadRaw(System.String,System.IntPtr,System.Int64)">
@@ -7045,7 +7166,7 @@
             <returns>A map of comparison results; will be single-channel 32-bit floating-point. 
             If image is WxH and templ is wxh then result will be (W-w+1) x (H-h+1).</returns>
         </member>
-        <member name="M:OpenCvSharp.CPlusPlus.Mat.FindContours(OpenCvSharp.CPlusPlus.Point[][]@,OpenCvSharp.CPlusPlus.HiearchyIndex[]@,OpenCvSharp.ContourRetrieval,OpenCvSharp.ContourChain,System.Nullable{OpenCvSharp.CPlusPlus.Point})">
+        <member name="M:OpenCvSharp.CPlusPlus.Mat.FindContours(OpenCvSharp.CPlusPlus.Point[][]@,OpenCvSharp.CPlusPlus.HierarchyIndex[]@,OpenCvSharp.ContourRetrieval,OpenCvSharp.ContourChain,System.Nullable{OpenCvSharp.CPlusPlus.Point})">
             <summary>
             Finds contours in a binary image.
             The source is an 8-bit single-channel image. Non-zero pixels are treated as 1’s. 
@@ -7103,7 +7224,7 @@
             This is useful if the contours are extracted from the image ROI and then they should be analyzed in the whole image context.</param>
             <returns>Detected contours. Each contour is stored as a vector of points.</returns>
         </member>
-        <member name="M:OpenCvSharp.CPlusPlus.Mat.DrawContours(System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{OpenCvSharp.CPlusPlus.Point}},System.Int32,OpenCvSharp.CPlusPlus.Scalar,System.Int32,OpenCvSharp.LineType,System.Collections.Generic.IEnumerable{OpenCvSharp.CPlusPlus.HiearchyIndex},System.Int32,System.Nullable{OpenCvSharp.CPlusPlus.Point})">
+        <member name="M:OpenCvSharp.CPlusPlus.Mat.DrawContours(System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{OpenCvSharp.CPlusPlus.Point}},System.Int32,OpenCvSharp.CPlusPlus.Scalar,System.Int32,OpenCvSharp.LineType,System.Collections.Generic.IEnumerable{OpenCvSharp.CPlusPlus.HierarchyIndex},System.Int32,System.Nullable{OpenCvSharp.CPlusPlus.Point})">
             <summary>
             Draws contours in the image
             </summary>
@@ -7320,6 +7441,13 @@
             from the point to the nearest contour edge. Otherwise, the function only checks 
             if the point is inside a contour or not.</param>
             <returns>Positive (inside), negative (outside), or zero (on an edge) value.</returns>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.Mat.DistanceTransform(OpenCvSharp.DistanceType,OpenCvSharp.CPlusPlus.DistanceMaskSize)">
+            <summary>
+            computes the distance transform map
+            </summary>
+            <param name="distanceType"></param>
+            <param name="maskSize"></param>
         </member>
         <member name="M:OpenCvSharp.CPlusPlus.Mat.#ctor(System.IntPtr)">
             <summary>
@@ -10420,6 +10548,186 @@
             </summary>
             <param name="idx">Array of Mat::dims indices.</param>
             <returns>A value to the specified array element.</returns>
+        </member>
+        <member name="T:OpenCvSharp.CPlusPlus.OutputArrayOfMatList">
+            <summary>
+            Proxy datatype for passing Mat's and List&lt;&gt;'s as output parameters
+            </summary>
+        </member>
+        <member name="T:OpenCvSharp.CPlusPlus.OutputArray">
+            <summary>
+            Proxy datatype for passing Mat's and List&lt;&gt;'s as output parameters
+            </summary>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.#ctor(OpenCvSharp.CPlusPlus.Mat)">
+            <summary>
+            
+            </summary>
+            <param name="mat"></param>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.#ctor(OpenCvSharp.CPlusPlus.Gpu.GpuMat)">
+            <summary>
+            
+            </summary>
+            <param name="mat"></param>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.#ctor(System.Collections.Generic.IEnumerable{OpenCvSharp.CPlusPlus.Mat})">
+            <summary>
+            
+            </summary>
+            <param name="mat"></param>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.Dispose(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.op_Implicit(OpenCvSharp.CPlusPlus.Mat)~OpenCvSharp.CPlusPlus.OutputArray">
+            <summary>
+            
+            </summary>
+            <param name="mat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.op_Implicit(OpenCvSharp.CPlusPlus.Gpu.GpuMat)~OpenCvSharp.CPlusPlus.OutputArray">
+            <summary>
+            
+            </summary>
+            <param name="mat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.IsMat">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.GetMat">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.IsGpuMat">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.GetGpuMat">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.IsVectorOfMat">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.GetVectorOfMat">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.AssignResult">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.Fix">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.IsReady">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.ThrowIfNotReady">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.Create(OpenCvSharp.CPlusPlus.Mat)">
+            <summary>
+            Creates a proxy class of the specified matrix
+            </summary>
+            <param name="mat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.Create(OpenCvSharp.CPlusPlus.Gpu.GpuMat)">
+            <summary>
+            Creates a proxy class of the specified matrix
+            </summary>
+            <param name="mat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.Create``1(System.Collections.Generic.List{``0})">
+            <summary>
+            Creates a proxy class of the specified list
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.Create(System.Collections.Generic.List{OpenCvSharp.CPlusPlus.Mat})">
+            <summary>
+            Creates a proxy class of the specified list
+            </summary>
+            <param name="list"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.OutputArrayOfMatList.#ctor(System.Collections.Generic.List{OpenCvSharp.CPlusPlus.Mat})">
+            <summary>
+            
+            </summary>
+            <param name="list"></param>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.OutputArrayOfMatList.GetVectorOfMat">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.OutputArrayOfMatList.AssignResult">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.OutputArrayOfMatList.Dispose(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:OpenCvSharp.CPlusPlus.OutputArrayOfStructList`1">
+            <summary>
+            Proxy datatype for passing Mat's and List&lt;&gt;'s as output parameters
+            </summary>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.OutputArrayOfStructList`1.#ctor(System.Collections.Generic.List{`0})">
+            <summary>
+            
+            </summary>
+            <param name="list"></param>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.OutputArrayOfStructList`1.AssignResult">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.OutputArrayOfStructList`1.Dispose(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="disposing"></param>
         </member>
         <member name="T:OpenCvSharp.CPlusPlus.Rectf">
             <summary>
@@ -22897,111 +23205,6 @@
             Synonym for OutputArray.
             </summary>
         </member>
-        <member name="T:OpenCvSharp.CPlusPlus.OutputArray">
-            <summary>
-            Proxy datatype for passing Mat's and List&lt;&gt;'s as output parameters
-            </summary>
-        </member>
-        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.#ctor(OpenCvSharp.CPlusPlus.Mat)">
-            <summary>
-            
-            </summary>
-            <param name="mat"></param>
-        </member>
-        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.#ctor(OpenCvSharp.CPlusPlus.Gpu.GpuMat)">
-            <summary>
-            
-            </summary>
-            <param name="mat"></param>
-        </member>
-        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.Dispose(System.Boolean)">
-            <summary>
-            
-            </summary>
-            <param name="disposing"></param>
-        </member>
-        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.op_Implicit(OpenCvSharp.CPlusPlus.Mat)~OpenCvSharp.CPlusPlus.OutputArray">
-            <summary>
-            
-            </summary>
-            <param name="mat"></param>
-            <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.op_Implicit(OpenCvSharp.CPlusPlus.Gpu.GpuMat)~OpenCvSharp.CPlusPlus.OutputArray">
-            <summary>
-            
-            </summary>
-            <param name="mat"></param>
-            <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.IsMat">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.GetMat">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.IsGpuMat">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.GetGpuMat">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.AssignResult">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.Fix">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.IsReady">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.ThrowIfNotReady">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.Create(OpenCvSharp.CPlusPlus.Mat)">
-            <summary>
-            Creates a proxy class of the specified matrix
-            </summary>
-            <param name="mat"></param>
-            <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.Create(OpenCvSharp.CPlusPlus.Gpu.GpuMat)">
-            <summary>
-            Creates a proxy class of the specified matrix
-            </summary>
-            <param name="mat"></param>
-            <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.CPlusPlus.OutputArray.Create``1(System.Collections.Generic.List{``0})">
-            <summary>
-            Creates a proxy class of the specified list
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="list"></param>
-            <returns></returns>
-        </member>
         <member name="M:OpenCvSharp.CPlusPlus.InputOutputArray.#ctor(OpenCvSharp.CPlusPlus.Mat)">
             <summary>
             
@@ -24426,17 +24629,17 @@
             For accessing each byte of Int32 value
             </summary>
         </member>
-        <member name="T:OpenCvSharp.CPlusPlus.HiearchyIndex">
+        <member name="T:OpenCvSharp.CPlusPlus.HierarchyIndex">
             <summary>
             Information about the image topology for cv::findContours
             </summary>
         </member>
-        <member name="M:OpenCvSharp.CPlusPlus.HiearchyIndex.#ctor">
+        <member name="M:OpenCvSharp.CPlusPlus.HierarchyIndex.#ctor">
             <summary>
             
             </summary>
         </member>
-        <member name="M:OpenCvSharp.CPlusPlus.HiearchyIndex.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:OpenCvSharp.CPlusPlus.HierarchyIndex.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             
             </summary>
@@ -24445,35 +24648,35 @@
             <param name="child"></param>
             <param name="parent"></param>
         </member>
-        <member name="M:OpenCvSharp.CPlusPlus.HiearchyIndex.FromVec4i(OpenCvSharp.CPlusPlus.Vec4i)">
+        <member name="M:OpenCvSharp.CPlusPlus.HierarchyIndex.FromVec4i(OpenCvSharp.CPlusPlus.Vec4i)">
             <summary>
             
             </summary>
             <param name="vec"></param>
             <returns></returns>
         </member>
-        <member name="M:OpenCvSharp.CPlusPlus.HiearchyIndex.ToVec4i">
+        <member name="M:OpenCvSharp.CPlusPlus.HierarchyIndex.ToVec4i">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="P:OpenCvSharp.CPlusPlus.HiearchyIndex.Next">
+        <member name="P:OpenCvSharp.CPlusPlus.HierarchyIndex.Next">
             <summary>
             
             </summary>
         </member>
-        <member name="P:OpenCvSharp.CPlusPlus.HiearchyIndex.Previous">
+        <member name="P:OpenCvSharp.CPlusPlus.HierarchyIndex.Previous">
             <summary>
             
             </summary>
         </member>
-        <member name="P:OpenCvSharp.CPlusPlus.HiearchyIndex.Child">
+        <member name="P:OpenCvSharp.CPlusPlus.HierarchyIndex.Child">
             <summary>
             
             </summary>
         </member>
-        <member name="P:OpenCvSharp.CPlusPlus.HiearchyIndex.Parent">
+        <member name="P:OpenCvSharp.CPlusPlus.HierarchyIndex.Parent">
             <summary>
             
             </summary>
@@ -30062,28 +30265,28 @@
         </member>
         <member name="M:OpenCvSharp.CPlusPlus.Rect.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
-            
+            Initializes a new instance of the Rectangle class with the specified location and size.
             </summary>
-            <param name="x"></param>
-            <param name="y"></param>
-            <param name="width"></param>
-            <param name="height"></param>
+            <param name="x">The x-coordinate of the upper-left corner of the rectangle.</param>
+            <param name="y">The y-coordinate of the upper-left corner of the rectangle.</param>
+            <param name="width">The width of the rectangle.</param>
+            <param name="height">The height of the rectangle.</param>
         </member>
         <member name="M:OpenCvSharp.CPlusPlus.Rect.#ctor(OpenCvSharp.CPlusPlus.Point,OpenCvSharp.CPlusPlus.Size)">
             <summary>
-            
+            Initializes a new instance of the Rectangle class with the specified location and size.
             </summary>
-            <param name="location"></param>
-            <param name="size"></param>
+            <param name="location">A Point that represents the upper-left corner of the rectangular region.</param>
+            <param name="size">A Size that represents the width and height of the rectangular region.</param>
         </member>
         <member name="M:OpenCvSharp.CPlusPlus.Rect.FromLTRB(System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
-            
+            Creates a Rectangle structure with the specified edge locations.
             </summary>
-            <param name="left"></param>
-            <param name="top"></param>
-            <param name="right"></param>
-            <param name="bottom"></param>
+            <param name="left">The x-coordinate of the upper-left corner of this Rectangle structure.</param>
+            <param name="top">The y-coordinate of the upper-left corner of this Rectangle structure.</param>
+            <param name="right">The x-coordinate of the lower-right corner of this Rectangle structure.</param>
+            <param name="bottom">The y-coordinate of the lower-right corner of this Rectangle structure.</param>
         </member>
         <member name="M:OpenCvSharp.CPlusPlus.Rect.op_Implicit(OpenCvSharp.CPlusPlus.Rect)~OpenCvSharp.CvRect">
             <summary>
@@ -32370,6 +32573,12 @@
             </summary>
             <param name="mat"></param>
         </member>
+        <member name="M:OpenCvSharp.CPlusPlus.InputArray.#ctor(System.Collections.Generic.IEnumerable{OpenCvSharp.CPlusPlus.Mat})">
+            <summary>
+            
+            </summary>
+            <param name="mat"></param>
+        </member>
         <member name="M:OpenCvSharp.CPlusPlus.InputArray.Dispose(System.Boolean)">
             <summary>
             
@@ -32411,6 +32620,20 @@
             <param name="mat"></param>
             <returns></returns>
         </member>
+        <member name="M:OpenCvSharp.CPlusPlus.InputArray.op_Explicit(System.Collections.Generic.List{OpenCvSharp.CPlusPlus.Mat})~OpenCvSharp.CPlusPlus.InputArray">
+            <summary>
+            
+            </summary>
+            <param name="mats"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.InputArray.op_Explicit(OpenCvSharp.CPlusPlus.Mat[])~OpenCvSharp.CPlusPlus.InputArray">
+            <summary>
+            
+            </summary>
+            <param name="mats"></param>
+            <returns></returns>
+        </member>
         <member name="M:OpenCvSharp.CPlusPlus.InputArray.Create(OpenCvSharp.CPlusPlus.Mat)">
             <summary>
             Creates a proxy class of the specified Mat
@@ -32444,6 +32667,13 @@
             Creates a proxy class of the specified GpuMat
             </summary>
             <param name="mat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.InputArray.Create(System.Collections.Generic.IEnumerable{OpenCvSharp.CPlusPlus.Mat})">
+            <summary>
+            Creates a proxy class of the specified array of Mat 
+            </summary>
+            <param name="matVector"></param>
             <returns></returns>
         </member>
         <member name="M:OpenCvSharp.CPlusPlus.InputArray.Create``1(System.Collections.Generic.IEnumerable{``0})">
@@ -32502,28 +32732,6 @@
             <summary>
             
             </summary>
-        </member>
-        <member name="T:OpenCvSharp.CPlusPlus.OutputArray`1">
-            <summary>
-            Proxy datatype for passing Mat's and List&lt;&gt;'s as output parameters
-            </summary>
-        </member>
-        <member name="M:OpenCvSharp.CPlusPlus.OutputArray`1.#ctor(System.Collections.Generic.List{`0})">
-            <summary>
-            
-            </summary>
-            <param name="list"></param>
-        </member>
-        <member name="M:OpenCvSharp.CPlusPlus.OutputArray`1.AssignResult">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:OpenCvSharp.CPlusPlus.OutputArray`1.Dispose(System.Boolean)">
-            <summary>
-            
-            </summary>
-            <param name="disposing"></param>
         </member>
         <member name="T:OpenCvSharp.CPlusPlus.VectorOfByte">
             <summary>
@@ -33429,6 +33637,12 @@
             
             </summary>
             <param name="size"></param>
+        </member>
+        <member name="M:OpenCvSharp.CPlusPlus.VectorOfMat.#ctor(System.Collections.Generic.IEnumerable{OpenCvSharp.CPlusPlus.Mat})">
+            <summary>
+            
+            </summary>
+            <param name="mats"></param>
         </member>
         <member name="M:OpenCvSharp.CPlusPlus.VectorOfMat.#ctor(System.IntPtr)">
             <summary>

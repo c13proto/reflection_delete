@@ -263,6 +263,11 @@ namespace 鏡面反射光除去処理
                     trackBar_cont.Value = (int)(isnumber * 10);
         }
 
+        private void Click_照度差ステレオ(object sender, EventArgs e)
+        {
+            if (is4Image)照度差ステレオ法.Instance.Show();
+        }
+
 
 
 
