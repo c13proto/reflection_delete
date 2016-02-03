@@ -35,11 +35,11 @@
             this.textBox_2 = new System.Windows.Forms.TextBox();
             this.textBox_3 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.radioButton_color = new System.Windows.Forms.RadioButton();
-            this.radioButton_gray = new System.Windows.Forms.RadioButton();
-            this.radioButton_G = new System.Windows.Forms.RadioButton();
-            this.radioButton_B = new System.Windows.Forms.RadioButton();
             this.radioButton_R = new System.Windows.Forms.RadioButton();
+            this.radioButton_B = new System.Windows.Forms.RadioButton();
+            this.radioButton_G = new System.Windows.Forms.RadioButton();
+            this.radioButton_gray = new System.Windows.Forms.RadioButton();
+            this.radioButton_color = new System.Windows.Forms.RadioButton();
             this.textBox_camera = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -47,8 +47,12 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.directorySearcher1 = new System.DirectoryServices.DirectorySearcher();
+            this.checkBox_mirror = new System.Windows.Forms.CheckBox();
+            this.trackBar_mirror = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIpl1)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_mirror)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBoxIpl1
@@ -114,41 +118,17 @@
             this.panel1.Size = new System.Drawing.Size(65, 115);
             this.panel1.TabIndex = 6;
             // 
-            // radioButton_color
+            // radioButton_R
             // 
-            this.radioButton_color.AutoSize = true;
-            this.radioButton_color.Location = new System.Drawing.Point(3, 3);
-            this.radioButton_color.Name = "radioButton_color";
-            this.radioButton_color.Size = new System.Drawing.Size(48, 16);
-            this.radioButton_color.TabIndex = 0;
-            this.radioButton_color.TabStop = true;
-            this.radioButton_color.Text = "color";
-            this.radioButton_color.UseVisualStyleBackColor = true;
-            this.radioButton_color.Click += new System.EventHandler(this.Click_color);
-            // 
-            // radioButton_gray
-            // 
-            this.radioButton_gray.AutoSize = true;
-            this.radioButton_gray.Location = new System.Drawing.Point(3, 25);
-            this.radioButton_gray.Name = "radioButton_gray";
-            this.radioButton_gray.Size = new System.Drawing.Size(45, 16);
-            this.radioButton_gray.TabIndex = 1;
-            this.radioButton_gray.TabStop = true;
-            this.radioButton_gray.Text = "gray";
-            this.radioButton_gray.UseVisualStyleBackColor = true;
-            this.radioButton_gray.Click += new System.EventHandler(this.Click_gray);
-            // 
-            // radioButton_G
-            // 
-            this.radioButton_G.AutoSize = true;
-            this.radioButton_G.Location = new System.Drawing.Point(3, 47);
-            this.radioButton_G.Name = "radioButton_G";
-            this.radioButton_G.Size = new System.Drawing.Size(45, 16);
-            this.radioButton_G.TabIndex = 2;
-            this.radioButton_G.TabStop = true;
-            this.radioButton_G.Text = "B(x)";
-            this.radioButton_G.UseVisualStyleBackColor = true;
-            this.radioButton_G.Click += new System.EventHandler(this.Click_B);
+            this.radioButton_R.AutoSize = true;
+            this.radioButton_R.Location = new System.Drawing.Point(3, 91);
+            this.radioButton_R.Name = "radioButton_R";
+            this.radioButton_R.Size = new System.Drawing.Size(44, 16);
+            this.radioButton_R.TabIndex = 4;
+            this.radioButton_R.TabStop = true;
+            this.radioButton_R.Text = "R(z)";
+            this.radioButton_R.UseVisualStyleBackColor = true;
+            this.radioButton_R.Click += new System.EventHandler(this.Click_R);
             // 
             // radioButton_B
             // 
@@ -162,17 +142,41 @@
             this.radioButton_B.UseVisualStyleBackColor = true;
             this.radioButton_B.Click += new System.EventHandler(this.Click_G);
             // 
-            // radioButton_R
+            // radioButton_G
             // 
-            this.radioButton_R.AutoSize = true;
-            this.radioButton_R.Location = new System.Drawing.Point(3, 91);
-            this.radioButton_R.Name = "radioButton_R";
-            this.radioButton_R.Size = new System.Drawing.Size(44, 16);
-            this.radioButton_R.TabIndex = 4;
-            this.radioButton_R.TabStop = true;
-            this.radioButton_R.Text = "R(z)";
-            this.radioButton_R.UseVisualStyleBackColor = true;
-            this.radioButton_R.Click += new System.EventHandler(this.Click_R);
+            this.radioButton_G.AutoSize = true;
+            this.radioButton_G.Location = new System.Drawing.Point(3, 47);
+            this.radioButton_G.Name = "radioButton_G";
+            this.radioButton_G.Size = new System.Drawing.Size(45, 16);
+            this.radioButton_G.TabIndex = 2;
+            this.radioButton_G.TabStop = true;
+            this.radioButton_G.Text = "B(x)";
+            this.radioButton_G.UseVisualStyleBackColor = true;
+            this.radioButton_G.Click += new System.EventHandler(this.Click_B);
+            // 
+            // radioButton_gray
+            // 
+            this.radioButton_gray.AutoSize = true;
+            this.radioButton_gray.Location = new System.Drawing.Point(3, 25);
+            this.radioButton_gray.Name = "radioButton_gray";
+            this.radioButton_gray.Size = new System.Drawing.Size(45, 16);
+            this.radioButton_gray.TabIndex = 1;
+            this.radioButton_gray.TabStop = true;
+            this.radioButton_gray.Text = "gray";
+            this.radioButton_gray.UseVisualStyleBackColor = true;
+            this.radioButton_gray.Click += new System.EventHandler(this.Click_gray);
+            // 
+            // radioButton_color
+            // 
+            this.radioButton_color.AutoSize = true;
+            this.radioButton_color.Location = new System.Drawing.Point(3, 3);
+            this.radioButton_color.Name = "radioButton_color";
+            this.radioButton_color.Size = new System.Drawing.Size(48, 16);
+            this.radioButton_color.TabIndex = 0;
+            this.radioButton_color.TabStop = true;
+            this.radioButton_color.Text = "color";
+            this.radioButton_color.UseVisualStyleBackColor = true;
+            this.radioButton_color.Click += new System.EventHandler(this.Click_color);
             // 
             // textBox_camera
             // 
@@ -236,12 +240,41 @@
             this.label6.TabIndex = 13;
             this.label6.Text = "3";
             // 
+            // directorySearcher1
+            // 
+            this.directorySearcher1.ClientTimeout = System.TimeSpan.Parse("-00:00:01");
+            this.directorySearcher1.ServerPageTimeLimit = System.TimeSpan.Parse("-00:00:01");
+            this.directorySearcher1.ServerTimeLimit = System.TimeSpan.Parse("-00:00:01");
+            // 
+            // checkBox_mirror
+            // 
+            this.checkBox_mirror.AutoSize = true;
+            this.checkBox_mirror.Location = new System.Drawing.Point(2, 302);
+            this.checkBox_mirror.Name = "checkBox_mirror";
+            this.checkBox_mirror.Size = new System.Drawing.Size(79, 16);
+            this.checkBox_mirror.TabIndex = 16;
+            this.checkBox_mirror.Text = "mirror_num";
+            this.checkBox_mirror.UseVisualStyleBackColor = true;
+            // 
+            // trackBar_mirror
+            // 
+            this.trackBar_mirror.AutoSize = false;
+            this.trackBar_mirror.Location = new System.Drawing.Point(2, 321);
+            this.trackBar_mirror.Margin = new System.Windows.Forms.Padding(0);
+            this.trackBar_mirror.Maximum = 3;
+            this.trackBar_mirror.Name = "trackBar_mirror";
+            this.trackBar_mirror.Size = new System.Drawing.Size(75, 19);
+            this.trackBar_mirror.TabIndex = 17;
+            this.trackBar_mirror.TabStop = false;
+            // 
             // 照度差ステレオ法
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(439, 337);
+            this.Controls.Add(this.trackBar_mirror);
+            this.Controls.Add(this.checkBox_mirror);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -261,6 +294,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIpl1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_mirror)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -287,5 +321,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+        private System.DirectoryServices.DirectorySearcher directorySearcher1;
+        private System.Windows.Forms.CheckBox checkBox_mirror;
+        private System.Windows.Forms.TrackBar trackBar_mirror;
     }
 }

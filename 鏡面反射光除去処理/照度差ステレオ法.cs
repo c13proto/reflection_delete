@@ -53,23 +53,23 @@ namespace 鏡面反射光除去処理
 
             light_v = new double[,] 
             {   
-                {   -Math.Cos(deg2rad*double.Parse(textBox_0.Text.Split(',')[0])*Math.Cos(deg2rad*double.Parse(textBox_0.Text.Split(',')[1]))),
-                    -Math.Sin(deg2rad*double.Parse(textBox_0.Text.Split(',')[0]))*Math.Cos(deg2rad*double.Parse(textBox_0.Text.Split(',')[1])), 
+                {   -Math.Cos(deg2rad*double.Parse(textBox_0.Text.Split(',')[1]))*Math.Cos(deg2rad*double.Parse(textBox_0.Text.Split(',')[0])),
+                    -Math.Cos(deg2rad*double.Parse(textBox_0.Text.Split(',')[1]))*Math.Sin(deg2rad*double.Parse(textBox_0.Text.Split(',')[0])), 
                      Math.Sin(deg2rad*double.Parse(textBox_0.Text.Split(',')[1]))
                 },
 
-                {   -Math.Cos(deg2rad*double.Parse(textBox_1.Text.Split(',')[0])*Math.Cos(deg2rad*double.Parse(textBox_1.Text.Split(',')[1]))),
-                    -Math.Sin(deg2rad*double.Parse(textBox_1.Text.Split(',')[0]))*Math.Cos(deg2rad*double.Parse(textBox_1.Text.Split(',')[1])), 
+                {   -Math.Cos(deg2rad*double.Parse(textBox_1.Text.Split(',')[1]))*Math.Cos(deg2rad*double.Parse(textBox_1.Text.Split(',')[0])),
+                    -Math.Cos(deg2rad*double.Parse(textBox_1.Text.Split(',')[1]))*Math.Sin(deg2rad*double.Parse(textBox_1.Text.Split(',')[0])), 
                      Math.Sin(deg2rad*double.Parse(textBox_1.Text.Split(',')[1]))
                 },
 
-                {   -Math.Cos(deg2rad*double.Parse(textBox_2.Text.Split(',')[0])*Math.Cos(deg2rad*double.Parse(textBox_2.Text.Split(',')[1]))),
-                    -Math.Sin(deg2rad*double.Parse(textBox_2.Text.Split(',')[0]))*Math.Cos(deg2rad*double.Parse(textBox_2.Text.Split(',')[1])), 
+                {   -Math.Cos(deg2rad*double.Parse(textBox_2.Text.Split(',')[1]))*Math.Cos(deg2rad*double.Parse(textBox_2.Text.Split(',')[0])),
+                    -Math.Cos(deg2rad*double.Parse(textBox_2.Text.Split(',')[1]))*Math.Sin(deg2rad*double.Parse(textBox_2.Text.Split(',')[0])), 
                      Math.Sin(deg2rad*double.Parse(textBox_2.Text.Split(',')[1]))
                 },
 
-                {   -Math.Cos(deg2rad*double.Parse(textBox_3.Text.Split(',')[0])*Math.Cos(deg2rad*double.Parse(textBox_3.Text.Split(',')[1]))),
-                    -Math.Sin(deg2rad*double.Parse(textBox_3.Text.Split(',')[0]))*Math.Cos(deg2rad*double.Parse(textBox_3.Text.Split(',')[1])), 
+                {   -Math.Cos(deg2rad*double.Parse(textBox_3.Text.Split(',')[1]))*Math.Cos(deg2rad*double.Parse(textBox_3.Text.Split(',')[0])),
+                    -Math.Cos(deg2rad*double.Parse(textBox_3.Text.Split(',')[1]))*Math.Sin(deg2rad*double.Parse(textBox_3.Text.Split(',')[0])), 
                      Math.Sin(deg2rad*double.Parse(textBox_3.Text.Split(',')[1]))
                 },
             };
@@ -111,17 +111,23 @@ namespace 鏡面反射光除去処理
         }
         int 鏡面反射番号取得(int x, int y)
         {
-            double max_val = 0;
             int max_num = 0;
-            for (int i = 0; i < 4; i++)
+            if (checkBox_mirror.Checked) max_num = trackBar_mirror.Value;
+            else
             {
-                var val = Cv.Get2D(メイン画面.入力画像[i], y, x).Val0;
-                if (val > max_val)
+                double max_val = 0;
+
+                for (int i = 0; i < 4; i++)
                 {
-                    max_val = val;
-                    max_num = i;//一番輝度値の大きい画像の番号
+                    var val = Cv.Get2D(メイン画面.入力画像[i], y, x).Val0;
+                    if (val > max_val)
+                    {
+                        max_val = val;
+                        max_num = i;//一番輝度値の大きい画像の番号
+                    }
                 }
             }
+
             return max_num;
         }
         double[] 画素値行列取得(int x, int y,int 鏡面反射画像番号)
