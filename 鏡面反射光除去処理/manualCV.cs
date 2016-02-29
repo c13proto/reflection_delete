@@ -18,11 +18,14 @@ namespace 鏡面反射光除去処理
                 {//medianX,Y SG完成
                     double[] vals = { 0, 0, 0, 0 };
 
-                    for (int num = 0; num < 4; num++) vals[num] = Cv.Get2D(images[num], y, x).Val0;
+                    for (int num = 0; num < メイン画面.image_num; num++) vals[num] = Cv.Get2D(images[num], y, x).Val0;
                     Array.Sort(vals);//並び替えを行う．min=vals[0]
 
                     CvScalar cs = Cv.Get2D(DST, y, x);
-                    double ave = (vals[0]+vals[1] + vals[2]) / 3.0;
+                    double ave = 0;
+
+                    if (メイン画面.image_num == 4) ave = (vals[0] + vals[1] + vals[2]) / 3.0;
+                    else ave = (vals[0] + vals[1] )/ 2.0;
                     cs.Val0 = ave;
                     //if (Math.Abs(ave - vals[3]) <= 35) cs.Val0 = vals[3];//どれも同じくらいだったら一番明るいのをとる
                     Cv.Set2D(DST, y, x, cs);
@@ -73,11 +76,12 @@ namespace 鏡面反射光除去処理
                 {//medianX,Y SG完成
                     double[] vals = { 0, 0, 0, 0 };
 
-                    for (int num = 0; num < 4; num++) vals[num]= Cv.Get2D(images[num], y, x).Val0;
+                    for (int num = 0; num < メイン画面.image_num; num++) vals[num] = Cv.Get2D(images[num], y, x).Val0;
                     Array.Sort(vals);//並び替えを行う．min=vals[0]
 
                     CvScalar cs=Cv.Get2D(DST,y,x);
-                    cs.Val0 = ( vals[1] + vals[2]) / 2;
+                    if(メイン画面.image_num==4)cs.Val0 = ( vals[1] + vals[2]) / 2;
+                    else cs.Val0 = (vals[0] + vals[1]) / 2;
                     Cv.Set2D(DST, y, x, cs);
                 }
             //for (int num = 0; num < 4; num++)images[num].Dispose();元のものに影響するっぽい

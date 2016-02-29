@@ -21,7 +21,7 @@ namespace 鏡面反射光除去処理
         public static IplImage Gyy;
 
         public static IplImage 出力画像;
-        public static Boolean is4Image = false;
+        public static int image_num = 0;
 
 
         public メイン画面()
@@ -31,7 +31,7 @@ namespace 鏡面反射光除去処理
         private void 自作プロセス実行()
         {
             System.Diagnostics.Debug.WriteLine("自作プロセス開始");
-            if (is4Image)
+            if (image_num>=3)
             {
                 int width = 入力画像[0].Width;
                 int height = 入力画像[0].Height;
@@ -52,64 +52,11 @@ namespace 鏡面反射光除去処理
         {
             自作プロセス実行();
         }
-        private void OnClick実行(object sender, EventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine("OnClick実行　開始");
-            if (is4Image)
-            {
 
-                int width = 入力画像[0].Width;
-                int height = 入力画像[0].Height;
-
-                SGx = Cv.CreateImage(new CvSize(width, height), BitDepth.U8, 1);
-                SGy = Cv.CreateImage(new CvSize(width, height), BitDepth.U8, 1);
-                manualCV mCV = new manualCV();//コサイン変換とメディアンフィルタかけるためのクラス
-
-                for (int num = 0; num < 4; num++)
-                {
-                    Gx[num] = 入力画像[num].Clone();
-                    Gy[num] = 入力画像[num].Clone();
-                }
-
-
-                for (int num = 0; num < 4; num++)
-                {//infilterX,Y
-                    mCV.infilterX(ref Gx[num], 入力画像[num]);
-                    mCV.infilterY(ref Gy[num], 入力画像[num]);
-                }
-                mCV.Median(Gx, ref SGx);
-                mCV.Median(Gy, ref SGy);
-
-                //Gxxを作る．とりあえず外周1ピクセルやらない方向で．
-                Gxx = Cv.CreateImage(new CvSize(width, height), BitDepth.U8, 1);
-                Gyy = Cv.CreateImage(new CvSize(width, height), BitDepth.U8, 1);
-
-                mCV.infilterX(ref Gxx, SGx);
-                mCV.infilterY(ref Gyy, SGy);
-
-                //SP作成（仮の出力画像）
-                IplImage SP = Cv.CreateImage(new CvSize(width, height), BitDepth.U8, 1);
-                for (int x = 0; x < width; x++)
-                    for (int y = 0; y < height; y++)
-                    {
-                        CvScalar cs;
-                        cs = Cv.Get2D(Gxx, y, x)+Cv.Get2D(Gyy, y, x);
-                        Cv.Set2D(SP, y, x, cs);
- 
-                    }
-                IplImage DCT_dst = Cv.CreateImage(new CvSize(width, height), BitDepth.U8, 1);
-                mCV.CvDct(ref DCT_dst, ref SP, 1024);//第3引数使われてない件
-
-                出力画像=DCT_dst.Clone();
-                
-            }
-            else System.Diagnostics.Debug.WriteLine("no 4 images");
-            System.Diagnostics.Debug.WriteLine("OnClick実行　終了");
-        }
 
         private void OnClick開く(object sender, EventArgs e)
         {
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < image_num; i++)
             {
                 if(入力画像[i]!=null)入力画像[i].Dispose();
                 入力画像[i] = Cv.CreateImage(new CvSize(640, 480), BitDepth.U8, 1);
@@ -136,8 +83,9 @@ namespace 鏡面反射光除去処理
                 {
                     入力画像[file.index] = new IplImage(file.value, LoadMode.GrayScale);
                 }
-                if (dialog.FileNames.Length == 4) is4Image = true;
-                else is4Image = false;
+                if (dialog.FileNames.Length == 4) image_num = 4;
+                else if (dialog.FileNames.Length == 3) image_num = 3;
+                else image_num = 0;
                 // ファイル名をタイトルバーに設定
                 this.Text = dialog.FileNames[0];
 
@@ -265,7 +213,62 @@ namespace 鏡面反射光除去処理
 
         private void Click_照度差ステレオ(object sender, EventArgs e)
         {
-            if (is4Image)照度差ステレオ法.Instance.Show();
+            if (image_num>0)照度差ステレオ法.Instance.Show();
+        }
+
+        private void OnClick再現(object sender, EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("OnClick実行　開始");
+            if (image_num > 0)
+            {
+
+                int width = 入力画像[0].Width;
+                int height = 入力画像[0].Height;
+
+                SGx = Cv.CreateImage(new CvSize(width, height), BitDepth.U8, 1);
+                SGy = Cv.CreateImage(new CvSize(width, height), BitDepth.U8, 1);
+                manualCV mCV = new manualCV();//コサイン変換とメディアンフィルタかけるためのクラス
+
+                for (int num = 0; num < image_num; num++)
+                {
+                    Gx[num] = 入力画像[num].Clone();
+                    Gy[num] = 入力画像[num].Clone();
+                }
+
+
+                for (int num = 0; num < image_num; num++)
+                {//infilterX,Y
+                    mCV.infilterX(ref Gx[num], 入力画像[num]);
+                    mCV.infilterY(ref Gy[num], 入力画像[num]);
+                }
+                mCV.Median(Gx, ref SGx);
+                mCV.Median(Gy, ref SGy);
+
+                //Gxxを作る．とりあえず外周1ピクセルやらない方向で．
+                Gxx = Cv.CreateImage(new CvSize(width, height), BitDepth.U8, 1);
+                Gyy = Cv.CreateImage(new CvSize(width, height), BitDepth.U8, 1);
+
+                mCV.infilterX(ref Gxx, SGx);
+                mCV.infilterY(ref Gyy, SGy);
+
+                //SP作成（仮の出力画像）
+                IplImage SP = Cv.CreateImage(new CvSize(width, height), BitDepth.U8, 1);
+                for (int x = 0; x < width; x++)
+                    for (int y = 0; y < height; y++)
+                    {
+                        CvScalar cs;
+                        cs = Cv.Get2D(Gxx, y, x) + Cv.Get2D(Gyy, y, x);
+                        Cv.Set2D(SP, y, x, cs);
+
+                    }
+                IplImage DCT_dst = Cv.CreateImage(new CvSize(width, height), BitDepth.U8, 1);
+                mCV.CvDct(ref DCT_dst, ref SP, 1024);//第3引数使われてない件
+
+                出力画像 = DCT_dst.Clone();
+
+            }
+            else System.Diagnostics.Debug.WriteLine("no 4 images");
+            System.Diagnostics.Debug.WriteLine("OnClick実行　終了");
         }
 
 

@@ -35,7 +35,7 @@
             this.label_color = new System.Windows.Forms.Label();
             this.label_座標 = new System.Windows.Forms.Label();
             this.trackBar_選択 = new System.Windows.Forms.TrackBar();
-            this.button_実行 = new System.Windows.Forms.Button();
+            this.button_再現 = new System.Windows.Forms.Button();
             this.checkBox_Gx = new System.Windows.Forms.CheckBox();
             this.checkBox_Gy = new System.Windows.Forms.CheckBox();
             this.checkBox_SG = new System.Windows.Forms.CheckBox();
@@ -122,15 +122,15 @@
             this.trackBar_選択.TabIndex = 6;
             this.trackBar_選択.Scroll += new System.EventHandler(this.OnScroll_trackBar_選択);
             // 
-            // button_実行
+            // button_再現
             // 
-            this.button_実行.Location = new System.Drawing.Point(3, 152);
-            this.button_実行.Name = "button_実行";
-            this.button_実行.Size = new System.Drawing.Size(80, 23);
-            this.button_実行.TabIndex = 7;
-            this.button_実行.Text = "実行";
-            this.button_実行.UseVisualStyleBackColor = true;
-            this.button_実行.Click += new System.EventHandler(this.OnClick実行);
+            this.button_再現.Location = new System.Drawing.Point(3, 152);
+            this.button_再現.Name = "button_再現";
+            this.button_再現.Size = new System.Drawing.Size(80, 23);
+            this.button_再現.TabIndex = 7;
+            this.button_再現.Text = "再現";
+            this.button_再現.UseVisualStyleBackColor = true;
+            this.button_再現.Click += new System.EventHandler(this.OnClick再現);
             // 
             // checkBox_Gx
             // 
@@ -178,7 +178,7 @@
             this.button_自作.Name = "button_自作";
             this.button_自作.Size = new System.Drawing.Size(80, 23);
             this.button_自作.TabIndex = 12;
-            this.button_自作.Text = "3平均";
+            this.button_自作.Text = "自作";
             this.button_自作.UseVisualStyleBackColor = true;
             this.button_自作.Click += new System.EventHandler(this.OnClick自作);
             // 
@@ -286,7 +286,7 @@
             this.Controls.Add(this.checkBox_SG);
             this.Controls.Add(this.checkBox_Gy);
             this.Controls.Add(this.checkBox_Gx);
-            this.Controls.Add(this.button_実行);
+            this.Controls.Add(this.button_再現);
             this.Controls.Add(this.trackBar_選択);
             this.Controls.Add(this.label_座標);
             this.Controls.Add(this.label_color);
@@ -313,7 +313,7 @@
         private System.Windows.Forms.Label label_color;
         private System.Windows.Forms.Label label_座標;
         private System.Windows.Forms.TrackBar trackBar_選択;
-        private System.Windows.Forms.Button button_実行;
+        private System.Windows.Forms.Button button_再現;
         private System.Windows.Forms.CheckBox checkBox_Gx;
         private System.Windows.Forms.CheckBox checkBox_Gy;
         private System.Windows.Forms.CheckBox checkBox_SG;
